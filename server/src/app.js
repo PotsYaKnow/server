@@ -11,10 +11,4 @@ app.use(bodyParser.json())
 app.use(cors()) // allow any client hit our server; will setup token later
 
 
-app.get('/status', (req, res) =>{
-  res.send({
-    message: 'hello world!'
-  })
-})
-
 app.listen(process.env.port || 8081)
