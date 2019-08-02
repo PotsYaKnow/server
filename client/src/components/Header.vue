@@ -1,29 +1,36 @@
 <template>
   <div class="w-full top-0 fixed bg-blue-500 flex justify-around">
     <div class="flex justify-start">
-      <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-        Studio
-      </button>
+      <router-link :to="{name: 'index'}">
+        <button class="bg-transparent
+    text-white
+    font-semibold  py-2 px-4 border
+    border-blue-500">
+          Studio
+        </button>
+      </router-link>
     </div>
-
     <div class="flex justify-end">
-      <button class="mr-5 bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+      <button class="bg-transparent
+    text-white
+    font-semibold  py-2 px-4 border
+    border-blue-500">
         Login
       </button>
-      <button class="bg-transparent hover:bg-blue-500
-    text-blue-700
-    font-semibold hover:text-white py-2 px-4 border
-    border-blue-500 hover:border-transparent rounded">
-        Sign Up
-      </button>
+      <router-link :to="{name: 'signup'}">
+        <button class="bg-transparent
+    text-white
+    font-semibold  py-2 px-4 border
+    border-blue-500">
+          Sign Up
+        </button>
+      </router-link>
     </div>
   </div>
 </template>
 <script>
 export default {
-  methods: {
-
-  }
+  methods: {}
 }
 
 </script>
