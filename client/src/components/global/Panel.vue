@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white ">
+  <div class="bg-white shadow-md mt-10">
     <div class="bg-blue-500" >
-      <h3>{{title}}</h3>
+      <p class=" p-2 text-left text-white">{{title}}</p>
     </div>
-    <div class="w-3/5 sm:w-auto md:w-3/5 lg:w-3/4 xl:w-3/4">
+    <div >
       <slot>
         No slot content defined.
       </slot>
@@ -18,6 +18,3 @@ export default {
   ]
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

@@ -6,6 +6,7 @@ import router from './router'
 import { sync } from 'vuex-router-sync'
 import store from '@/store/store'
 import '@/assets/css/tailwind.css'
+import '@/assets/css/main.css'
 import Panel from '@/components/global/Panel'
 
 Vue.config.productionTip = false

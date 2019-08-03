@@ -14,13 +14,12 @@ Connecting the pottery community one score and slip at a time.
 </div>
 </template>
 <script>
-import Panel from '@/components/Panel.vue'
+
 export default {
   name: 'Index',
   props: [
   ],
   components: {
-  "panel": Panel
   },
 }
 </script>
