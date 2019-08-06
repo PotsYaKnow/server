@@ -11,17 +11,13 @@
       </router-link>
     </div>
     <div class="flex justify-end">
-      <button class="bg-transparent
-    text-white
-    font-semibold  py-2 px-4 border
-    border-blue-500">
+    <router-link :to="{name: 'login'}">
+      <button class="btn btn-blue">
         Login
       </button>
+      </router-link>
       <router-link :to="{name: 'signup'}">
-        <button class="bg-transparent
-    text-white
-    font-semibold  py-2 px-4 border
-    border-blue-500">
+        <button class="btn btn-blue">
           Sign Up
         </button>
       </router-link>

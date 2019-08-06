@@ -21,8 +21,8 @@
         <div v-html="error" class="danger-alert"> </div>
         <br>
         <div>
-          <button class="btn btn-blue" @click="signup">
-            Sign Up
+          <button class="btn btn-blue" @click="login">
+            Login
           </button>
         </div>
       </form>
