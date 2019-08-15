@@ -14,7 +14,7 @@ app.use(cors()) // allow any client hit our server; will setup token later
 require('./passport')
 require('./routes')(app)
 
-sequelize.sync({force: false}).
+sequelize.sync({force: true}).
 then(() => {
     app.listen(process.env.port || 8081)
     console.log(`Server started on port ${config.port}`)
