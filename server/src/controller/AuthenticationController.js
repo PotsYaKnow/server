@@ -1,20 +1,24 @@
 const { User } = require('../model')
-//const jwt = require('jsonwebtoken')
-//const config = require('../config/config')
+const jwt = require('jsonwebtoken')
+const config = require('../config/config')
 
-/*
-function jwtSignUser(user){
-    const ONE_WEEK = 60 * 60 * 24 * 7
-    return jwt.sign(user, config.authentication.jwtSecret,
-        {expiresIn: ONE_WEEK})
-}*/
+
+function jwtSignUser (user) {
+    return jwt.sign(user, config.authentication.jwtSecret, { expiresIn: "7 days" })
+}
 
 module.exports = {
 
     async signup (req, res) {
         try {
             const user = await User.create(req.body)
-            res.send(user.toJSON())
+
+            const userJson = user.toJSON()
+
+            res.send({
+                user: userJson,
+                token: jwtSignUser(userJson)
+            })
         } catch (err) {
             res.status(400).send({
                 error: 'This email account is already in use'
@@ -33,21 +37,23 @@ module.exports = {
             })
 
             if (!user) {
-                res.status(403).send({
+
+                return res.status(403).send({
                     error: 'The login information was incorrect'
                 })
             }
-
-            const isPasswordValid = password === user.password
-
+            const isPasswordValid = await user.comparePassword(password)
             if (!isPasswordValid) {
-                res.status(403).send({
+                return res.status(403).send({
                     error: 'The login information was incorrect'
                 })
             }
 
-            let userJson = user.toJSON()
-            res.send({ user:  userJson})
+            const userJson = user.toJSON()
+            res.send({
+                user: userJson,
+                token: jwtSignUser(userJson)
+            })
         } catch (err) {
             res.status(500).send({
                 error: 'An error has occurred while trying to login'
