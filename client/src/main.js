@@ -19,6 +19,7 @@ Vue.component('panel', Panel)
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

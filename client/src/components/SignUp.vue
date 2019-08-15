@@ -1,7 +1,7 @@
 <template>
   <div>
     <panel class="bg-white  w-3/4 max-w-md mx-auto" title="Sign Up">
-      <form class="rounded px-8 pt-2 pb-8 mb-4">
+      <form autocomplete="off" class="rounded px-8 pt-2 pb-8 mb-4">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
             Email
@@ -14,7 +14,7 @@
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
             Password
           </label>
-          <input v-model="password" class="shadow appearance-none border border-red-500 rounded
+          <input v-model="password" autocomplete="new-password" class="shadow appearance-none border border-red-500 rounded
         w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none
         focus:shadow-outline" id="password" type="password" placeholder="*******">
         </div>
@@ -40,7 +40,7 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'signup',
   props: [],
-  data () {
+  data() {
     return {
       email: '',
       password: '',
@@ -55,11 +55,12 @@ export default {
           password: this.password
         })
 
-        /*this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
           name: 'index'
-        })*/
+        })
+
       } catch (error) {
 
         this.error = error.response.data.error
@@ -71,7 +72,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.danger-alert{
-  color :red;
+.danger-alert {
+  color: red;
 }
+
 </style>

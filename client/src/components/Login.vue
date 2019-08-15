@@ -21,9 +21,11 @@
         <div v-html="error" class="danger-alert"> </div>
         <br>
         <div>
-          <button class="btn btn-blue" @click="login">
-            Login
-          </button>
+
+            <button class="btn btn-blue" @click="login">
+              Login
+            </button>
+
         </div>
       </form>
     </panel>
@@ -40,7 +42,7 @@ import AuthenticationService from '@/services/AuthenticationService'
 export default {
   name: 'login',
   props: [],
-  data () {
+  data() {
     return {
       email: '',
       password: '',
@@ -55,11 +57,11 @@ export default {
           password: this.password
         })
 
-        /*this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
         this.$router.push({
           name: 'index'
-        })*/
+        })
       } catch (error) {
         this.error = error.response.data.error
       }
@@ -70,7 +72,8 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.danger-alert{
-  color :red;
+.danger-alert {
+  color: red;
 }
+
 </style>
