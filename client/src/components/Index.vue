@@ -6,20 +6,21 @@
     <h2>
       Connecting the pottery community one score and slip at a time.
     </h2>
-    <div>
-      <router-link :to="{name: 'create-pot'}">
-        <button class="btn btn-blue">
-          Add Pot
-        </button>
-      </router-link>
-    </div>
+
+    <potpanel>
+
+    </potpanel>
+
   </div>
 </template>
 <script>
+import PotPanel from './pot/PotPanel'
 export default {
   name: 'Index',
   props: [],
-  components: {},
+  components: {
+  'potpanel': PotPanel,
+  },
 }
 
 </script>

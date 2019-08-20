@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white shadow-md mt-10">
+  <div class="bg-white  w-3/4 max-w-md mx-auto shadow-md mt-10">
     <div class="bg-blue-500" >
       <h2 class="text-white">{{title}}</h2>
     </div>

@@ -23,9 +23,13 @@ const routes = [{
     component: PotCreation
   },
   {
-    path: '*',
+    path: '/studio',
     name: 'index',
     component: Index
+  },
+  {
+    path: '*',
+    redirect: 'index'
   }
 ]
 

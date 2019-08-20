@@ -11,11 +11,12 @@ passport.use(
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: config.authentication.jwtSecret
         },
-        async function (jwtPayload, done) {
+        async function (userPayload, done) {
+
             try {
                 const user = await User.findOne({
                     where: {
-                        id: jwtPayload.id
+                        id: userPayload.id
                     }
                 })
 

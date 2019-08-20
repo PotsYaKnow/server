@@ -30,7 +30,7 @@
 <script>
 export default {
   methods: {
-    logout() {
+    logout (){
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
       this.$router.push({
