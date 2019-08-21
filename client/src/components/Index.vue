@@ -6,11 +6,10 @@
     <h2>
       Connecting the pottery community one score and slip at a time.
     </h2>
-
-    <potpanel>
-
-    </potpanel>
-
+    <div v-if="$store.state.isUserLoggedIn">
+      <potpanel>
+      </potpanel>
+    </div>
   </div>
 </template>
 <script>
@@ -19,7 +18,7 @@ export default {
   name: 'Index',
   props: [],
   components: {
-  'potpanel': PotPanel,
+    'potpanel': PotPanel,
   },
 }
 

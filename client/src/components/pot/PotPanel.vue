@@ -1,12 +1,9 @@
 <template>
   <div>
     <panel title="Pot">
-      <div class="pot" v-for="pot in allPots" :key="pot.id">
-        <div class="pot-title">
-          {{pot.name}}
-        </div>
-        <div class="pot-note">
-          {{pot.note}}
+      <div class="pot" v-for="pot in allPots">
+        <div class="pot-name">
+          <p>{{pot.name}}</p>
         </div>
 
       </div>
@@ -35,6 +32,7 @@ export default {
       immediate: true,
       async handler (value) {
         this.allPots = (await PotService.getAllPots()).data
+        console.log(this.allPots)
       }
     }
   }
@@ -44,8 +42,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .pot {
-  padding: 20px;
-  height: 330px;
+  padding: 10px;
   overflow: hidden;
 }
 

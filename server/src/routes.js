@@ -11,6 +11,6 @@ module.exports = function (app) {
     app.post('/login', AuthenticationController.login)
 
 
-    app.post('/pot', isAuthenticated, PotController.createPot)
-    app.get('/pot', isAuthenticated, PotController.getAllPots)
+    app.post('/pot',  PotController.createPot)
+    app.get('/pot',  PotController.getAllPots)
 }

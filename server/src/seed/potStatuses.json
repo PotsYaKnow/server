@@ -1,0 +1,26 @@
+[
+    {
+        "status": "Building"
+    },
+    {
+        "status": "Drying"
+    },
+    {
+        "status": "Leather Hard"
+    },
+    {
+        "status": "Bone Dry"
+    },
+    {
+        "status": "Greenware"
+    },
+    {
+        "status": "Bisqued"
+    },
+    {
+        "status": "Glazed"
+    },
+    {
+        "status": "Complete"
+    }
+]

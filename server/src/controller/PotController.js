@@ -1,20 +1,23 @@
-const { User, Pot, PotNote } = require('../model')
+const { User, Pot, PotNote } = require('../models')
 
 module.exports = {
     async createPot (req, res) {
         try {
 
             const potParams = req.body
-            const userId = req.user.id
-
-            const newNote = PotNote.create(potParams.note)
+            //const userId = req.user.id
 
             const newPot = await Pot.create({
-                Name: potParams.name,
-                PotNoteId: newNote.id,
-                //PotStatusId: potParams.statusId,
-                UserId: userId
+                name: potParams.name,
+                UserId: potParams.userId
             })
+
+
+            const newNote = await PotNote.create(
+                {
+                    note: potParams.notes,
+                    potId: newPot.id
+                })
 
             res.send(newPot)
         } catch (err) {
