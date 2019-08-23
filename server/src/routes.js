@@ -3,6 +3,8 @@ const AuthenticationPolicy = require('./policies/AuthenticationPolicy')
 const isAuthenticated = require('./policies/isAuthenticated')
 
 const PotController = require('./controller/PotController')
+const PotStatusController = require('./controller/PotStatusController')
+
 
 
 
@@ -11,6 +13,8 @@ module.exports = function (app) {
     app.post('/login', AuthenticationController.login)
 
 
-    app.post('/pot',  PotController.createPot)
-    app.get('/pot',  PotController.getAllPots)
+    app.post('/pot', isAuthenticated, PotController.createPot)
+    app.get('/pot', PotController.getAllPots)
+
+    app.get('/potstatus', PotStatusController.getAllPotStatuses)
 }

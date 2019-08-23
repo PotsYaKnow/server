@@ -13,8 +13,8 @@
             Pot Status
           </label>
           <select id="pot-status" v-model="pot.status">
-            <option v-for="potStatus in allPotStatuses" v-bind:value="potStatus.value">
-              {{ potStatus.text }}
+            <option v-for="potStatus in allPotStatuses" v-bind:value="potStatus.id">
+              {{ potStatus.status }}
             </option>
           </select>
         </div>
@@ -38,16 +38,11 @@ export default {
   props: [],
   data() {
     return {
-      allPotStatuses: [
-        { text: 'One', value: 'A' },
-        { text: 'Two', value: 'B' },
-        { text: 'Three', value: 'C' }
-      ],
+      allPotStatuses: null,
       pot: {
         name: null,
         status: null,
-        notes: null,
-        user: this.$store.user
+        notes: null
       }
     }
   },
@@ -59,12 +54,6 @@ export default {
   },
   methods: {
     async createPot () {
-      /*this.error = null
-      const areAllFieldsFilledIn = Object.keys(this.song).every(key => !!this.song[key])
-      if (!areAllFieldsFilledIn) {
-        this.error = 'Please fill in all the required fields.'
-        return
-      }*/
 
       try {
         await PotService.createPot(this.pot)
@@ -73,6 +62,15 @@ export default {
         })
       } catch (err) {
         console.log(err)
+      }
+    }
+  },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.allPotStatuses = (await PotService.getAllPotStatuses()).data
+
       }
     }
   }

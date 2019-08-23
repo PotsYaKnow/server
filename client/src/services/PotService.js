@@ -6,5 +6,9 @@ export default {
   },
   getAllPots() {
     return Api().get('pot')
+  },
+
+  getAllPotStatuses(){
+    return Api().get('potStatus')
   }
 }

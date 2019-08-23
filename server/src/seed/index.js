@@ -5,7 +5,7 @@ const potStatuses = require('./potStatuses.json')
 
 
 
-sequelize.sync({ force: true })
+sequelize.sync({ force: false })
     .then(async function () {
 
         await Promise.all(

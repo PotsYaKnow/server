@@ -1,11 +1,18 @@
 <template>
   <div class=" container mx-auto">
-    <h1>
-      Pots Ya Know
-    </h1>
-    <h2>
-      Connecting the pottery community one score and slip at a time.
-    </h2>
+    <div v-if="!$store.state.isUserLoggedIn">
+      <h1>
+        Pots Ya Know
+      </h1>
+      <h2>
+        Connecting the pottery community one score and slip at a time.
+      </h2>
+    </div>
+    <div>
+      <router-link :to="{name: 'create-pot'}">
+        <button class="btn btn-blue">Add Pot</button>
+      </router-link>
+    </div>
     <div v-if="$store.state.isUserLoggedIn">
       <potpanel>
       </potpanel>

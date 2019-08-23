@@ -5,11 +5,12 @@ module.exports = {
         try {
 
             const potParams = req.body
-            //const userId = req.user.id
+            const userId = req.user.id
 
             const newPot = await Pot.create({
                 name: potParams.name,
-                UserId: potParams.userId
+                UserId: userId,
+                PotStatusId: potParams.status
             })
 
 
@@ -32,6 +33,7 @@ module.exports = {
         try {
 
             const allPots = await Pot.findAll({ limit: 10 })
+
 
             res.send(allPots)
         } catch (err) {
