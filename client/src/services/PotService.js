@@ -10,5 +10,9 @@ export default {
 
   getAllPotStatuses(){
     return Api().get('potStatus')
+  },
+
+  getPot(potId){
+    return Api().get(`pot/${potId}`, potId)
   }
 }

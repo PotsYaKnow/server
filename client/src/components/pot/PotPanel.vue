@@ -3,11 +3,14 @@
     <panel title="Pot">
       <div>
         <div class="pot" v-for="pot in allPots">
-          <div class="pot-name">
-            <p>{{pot.name}}</p>
+          <div class="flex justify-around">
+            <p class="pot-name">{{pot.name}}</p>
+
+            <router-link :to="{name: 'edit-pot', params: {potId: pot.id}}">
+            <button class="btn btn-blue"> Edit </button>
+            </router-link>
           </div>
         </div>
-
         <h2 v-if="allPots == null || allPots.length < 1"> No Pots Here..Go make some!!!</h2>
       </div>
     </panel>
@@ -22,11 +25,6 @@ export default {
 
       allPots: null
 
-    }
-  },
-  methods: {
-    navigateTo(route) {
-      this.$router.push(route)
     }
   },
   watch: {
@@ -49,7 +47,7 @@ export default {
 }
 
 .pot-name {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .pot-notes {

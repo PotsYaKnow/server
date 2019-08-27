@@ -1,24 +1,19 @@
-const { User, Pot, PotNote } = require('../models')
+const { User, Pot } = require('../models')
 
 module.exports = {
     async createPot (req, res) {
         try {
 
             const potParams = req.body
-            const userId = req.user.id
+            //const userId = req.user.id
 
             const newPot = await Pot.create({
                 name: potParams.name,
-                UserId: userId,
-                PotStatusId: potParams.status
+                UserId: potParams.userId,
+                PotStatusId: potParams.status,
+                notes: potParams.notes
             })
 
-
-            const newNote = await PotNote.create(
-                {
-                    note: potParams.notes,
-                    potId: newPot.id
-                })
 
             res.send(newPot)
         } catch (err) {
@@ -28,7 +23,23 @@ module.exports = {
             })
         }
     },
+    async getPot (req, res) {
+        try {
 
+            let result = await Pot.findByPk(req.params.potId)
+
+            let pot = renameProp('PotStatusId', 'status', result.toJSON())
+            pot = renameProp('UserId', 'userId', pot)
+
+            res.send(pot)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to find a pot'
+            })
+        }
+
+    },
     async getAllPots (req, res) {
         try {
 
@@ -39,8 +50,17 @@ module.exports = {
         } catch (err) {
             console.log(err)
             res.status(500).send({
-                error: 'An error occurred while trying to create a pot'
+                error: 'An error occurred while trying to find all pots'
             })
         }
+    }
+}
+
+function renameProp( oldProp,
+        newProp, { [oldProp]: old, ...others })
+{
+    return  {
+        [newProp]: old,
+        ...others
     }
 }

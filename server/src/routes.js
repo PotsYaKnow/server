@@ -13,8 +13,12 @@ module.exports = function (app) {
     app.post('/login', AuthenticationController.login)
 
 
-    app.post('/pot', isAuthenticated, PotController.createPot)
+
+    app.post('/pot', PotController.createPot)
     app.get('/pot', PotController.getAllPots)
+    app.get('/pot/:potId', PotController.getPot)
 
     app.get('/potstatus', PotStatusController.getAllPotStatuses)
+
+
 }

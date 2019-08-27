@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Pot = sequelize.define('Pot', {
-      name : DataTypes.STRING
+      name : DataTypes.STRING,
+      notes: DataTypes.TEXT
     });
 
     Pot.associate = function (models) {
         Pot.belongsTo(models.User)
-        Pot.hasMany(models.PotNote)
         Pot.belongsTo(models.PotStatus)
     }
 

@@ -3,7 +3,7 @@ const { PotStatus } = require('../models')
 module.exports = {
     async getAllPotStatuses (req, res) {
         try {
-
+            console.log('here')
             const allPotStatuses = await PotStatus.findAll()
             res.send(allPotStatuses)
         } catch (err) {

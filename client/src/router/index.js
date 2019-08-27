@@ -4,6 +4,7 @@ import Index from '@/components/Index.vue'
 import SignUp from '@/components/SignUp.vue'
 import Login from '@/components/Login.vue'
 import PotCreation from '@/components/pot/PotCreation.vue'
+import PotEditing from '@/components/pot/PotEditing.vue'
 
 Vue.use(Router)
 
@@ -23,13 +24,18 @@ const routes = [{
     component: PotCreation
   },
   {
+    path: '/pot/edit/:potId',
+    name: 'edit-pot',
+    component: PotEditing
+  },
+  {
     path: '/studio',
     name: 'index',
     component: Index
   },
   {
-    path: '*',
-    redirect: 'index'
+    path: '',
+    redirect: { name: 'index' }
   }
 ]
 

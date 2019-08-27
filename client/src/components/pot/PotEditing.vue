@@ -1,6 +1,6 @@
 <template>
   <div>
-    <panel class="bg-white  w-3/4 max-w-md mx-auto" title="Create Pot">
+    <panel class="bg-white  w-3/4 max-w-md mx-auto" title="Edit Pot">
       <form class="rounded px-8 pt-2 pb-8 mb-4">
         <div class="mb-4">
           <label class="textfield-label" for="pot-name">
@@ -23,8 +23,8 @@
           <br>
           <textarea v-model="pot.notes" placeholder="Add some notes...."></textarea>
         </div>
-        <button class="btn btn-blue" v-on:click="createPot">
-          Create</button>
+        <button class="btn btn-blue" v-on:click="editPot">
+          Edit</button>
       </form>
     </panel>
   </div>
@@ -33,24 +33,27 @@
 import PotService from '@/services/PotService'
 
 export default {
-  name: 'PotCreation',
+  name: 'PotEditing',
   props: [],
   data() {
     return {
       allPotStatuses: '',
       pot: {
         name: null,
-        status: 1,
+        status: null,
         notes: null,
-        userId: this.$store.state.user.id
+        UserId: null
       }
     }
   },
+  async mounted () {
+    const potId = this.$store.state.route.params.potId
+    this.pot = (await PotService.getPot(potId)).data
+  },
   methods: {
-    async createPot () {
-
+    async editPot () {
       try {
-        await PotService.createPot(this.pot)
+        await PotService.editPot(this.pot)
         this.$router.push({
           name: 'index'
         })
