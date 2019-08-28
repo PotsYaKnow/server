@@ -9,5 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         PotHistory.belongsTo(models.PotStatus)
     }
 
+
+
     return PotHistory
 }

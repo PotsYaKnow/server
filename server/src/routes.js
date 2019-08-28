@@ -20,5 +20,7 @@ module.exports = function (app) {
 
     app.get('/potstatus', PotStatusController.getAllPotStatuses)
 
+    app.put('/pot/:potId', PotController.editPot)
+
 
 }

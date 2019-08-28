@@ -8,11 +8,14 @@ export default {
     return Api().get('pot')
   },
 
-  getAllPotStatuses(){
+  getAllPotStatuses() {
     return Api().get('potStatus')
   },
 
-  getPot(potId){
+  getPot(potId) {
     return Api().get(`pot/${potId}`, potId)
+  },
+  editPot(pot) {
+    return Api().put(`pot/${pot.id}`, pot)
   }
 }

@@ -24,7 +24,7 @@
           <textarea v-model="pot.notes" placeholder="Add some notes...."></textarea>
         </div>
         <button class="btn btn-blue" v-on:click="editPot">
-          Edit</button>
+          Save</button>
       </form>
     </panel>
   </div>
@@ -41,8 +41,7 @@ export default {
       pot: {
         name: null,
         status: null,
-        notes: null,
-        UserId: null
+        notes: null
       }
     }
   },

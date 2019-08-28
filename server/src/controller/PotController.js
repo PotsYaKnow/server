@@ -53,13 +53,36 @@ module.exports = {
                 error: 'An error occurred while trying to find all pots'
             })
         }
+    },
+
+    async editPot (req, res) {
+        try {
+
+            let pot = renameProp('status', 'PotStatusId', req.body)
+
+            await Pot.update(pot, {
+                where: {
+                    id: req.params.potId
+                }
+            })
+
+            res.send(pot)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to edit a pot'
+            })
+        }
+
     }
 }
 
-function renameProp( oldProp,
-        newProp, { [oldProp]: old, ...others })
-{
-    return  {
+function renameProp (oldProp,
+    newProp, {
+        [oldProp]: old,
+        ...others
+    }) {
+    return {
         [newProp]: old,
         ...others
     }
