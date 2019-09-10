@@ -1,4 +1,4 @@
-const { User, Pot } = require('../models')
+const { User, Pot, PotHistory } = require('../models')
 
 module.exports = {
     async createPot (req, res) {
@@ -7,13 +7,13 @@ module.exports = {
             const potParams = req.body
             //const userId = req.user.id
 
-            const newPot = await Pot.create({
-                name: potParams.name,
-                UserId: potParams.userId,
-                PotStatusId: potParams.status,
-                notes: potParams.notes
-            })
+            const newPot = await Pot.create(req.body)
 
+            const potHistory = await PotHistory.create({
+                PotId: newPot.id,
+                PotStatusId: newPot.PotStatusId,
+                notes: newPot.notes,
+            })
 
             res.send(newPot)
         } catch (err) {
@@ -26,10 +26,7 @@ module.exports = {
     async getPot (req, res) {
         try {
 
-            let result = await Pot.findByPk(req.params.potId)
-
-            let pot = renameProp('PotStatusId', 'status', result.toJSON())
-            pot = renameProp('UserId', 'userId', pot)
+            let pot = await Pot.findByPk(req.params.potId)
 
             res.send(pot)
         } catch (err) {
@@ -43,7 +40,7 @@ module.exports = {
     async getAllPots (req, res) {
         try {
 
-            const allPots = await Pot.findAll({ limit: 10 })
+            const allPots = await Pot.findAll({ limit: 20 })
 
 
             res.send(allPots)
@@ -58,15 +55,20 @@ module.exports = {
     async editPot (req, res) {
         try {
 
-            let pot = renameProp('status', 'PotStatusId', req.body)
 
-            await Pot.update(pot, {
+            await Pot.update(req.body, {
                 where: {
                     id: req.params.potId
                 }
             })
 
-            res.send(pot)
+            await PotHistory.create({
+                PotId: req.params.potId,
+                PotStatusId: req.body.PotStatusId,
+                notes: req.body.notes,
+            })
+
+            res.send(req.body)
         } catch (err) {
             console.log(err)
             res.status(500).send({
@@ -74,6 +76,23 @@ module.exports = {
             })
         }
 
+    },
+    async getAllPotsHistory (req, res) {
+        try {
+
+            const allPotsHistory = await PotHistory.findAll({
+                where: {
+                    PotId: req.params.potId
+                }
+            })
+
+            res.send(allPotsHistory)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to find all pots'
+            })
+        }
     }
 }
 

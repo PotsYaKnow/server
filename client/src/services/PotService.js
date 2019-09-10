@@ -11,7 +11,9 @@ export default {
   getAllPotStatuses() {
     return Api().get('potStatus')
   },
-
+  getPotHistory(potId) {
+    return Api().get(`pot/history/${potId}`, potId)
+  },
   getPot(potId) {
     return Api().get(`pot/${potId}`, potId)
   },

@@ -7,7 +7,11 @@
             <p class="pot-name">{{pot.name}}</p>
 
             <router-link :to="{name: 'edit-pot', params: {potId: pot.id}}">
-            <button class="btn btn-blue"> Edit </button>
+              <button class="btn btn-blue"> Edit </button>
+            </router-link>
+
+            <router-link :to="{name: 'view-pot', params: {potId: pot.id}}">
+              <button class="btn btn-blue"> View </button>
             </router-link>
           </div>
         </div>

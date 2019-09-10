@@ -5,6 +5,8 @@ import SignUp from '@/components/SignUp.vue'
 import Login from '@/components/Login.vue'
 import PotCreation from '@/components/pot/PotCreation.vue'
 import PotEditing from '@/components/pot/PotEditing.vue'
+import PotHistory from '@/components/pot/PotHistory.vue'
+import PotHistoryEditing from '@/components/pot/PotHistoryEditing.vue'
 
 Vue.use(Router)
 
@@ -27,6 +29,16 @@ const routes = [{
     path: '/pot/edit/:potId',
     name: 'edit-pot',
     component: PotEditing
+  },
+  {
+    path: '/pot/edit/history/:potHistoryId',
+    name: 'edit-pothistory',
+    component: PotHistoryEditing
+  },
+  {
+    path: '/pot/view/:potId',
+    name: 'view-pot',
+    component: PotHistory
   },
   {
     path: '/studio',

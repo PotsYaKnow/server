@@ -12,7 +12,7 @@
           <label class="textfield-label" for="pot-status">
             Pot Status
           </label>
-          <select id="pot-status" v-model="pot.status">
+          <select id="pot-status" v-model="pot.PotStatusId">
             <option v-for="potStatus in allPotStatuses" v-bind:value="potStatus.id">
               {{ potStatus.status }}
             </option>
@@ -40,7 +40,7 @@ export default {
       allPotStatuses: '',
       pot: {
         name: null,
-        status: 1,
+        PotStatusId: 1,
         notes: null,
         userId: this.$store.state.user.id
       }
