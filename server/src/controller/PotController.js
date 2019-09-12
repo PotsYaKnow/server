@@ -1,4 +1,7 @@
-const { User, Pot, PotHistory } = require('../models')
+const { Pot, PotHistory, PotStatus } = require('../models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
+const _ = require('lodash')
 
 module.exports = {
     async createPot (req, res) {
@@ -40,8 +43,57 @@ module.exports = {
     async getAllPots (req, res) {
         try {
 
-            const allPots = await Pot.findAll({ limit: 20 })
 
+            let allPots = null
+            const search = req.query.search
+            console.log(search)
+
+
+            if (search) {
+                allPots = await Pot.findAll({
+                    limit: 10,
+                    order: [
+                        ['updatedAt', 'DESC']
+                    ],
+                    include: [{
+                        model: PotStatus,
+                        where: {
+                            [Op.or]: ['status'].map(key => ({
+                                [key]: {
+                                    [Op.like]: `%${search}%`
+                                }
+                            }))
+                        }
+                    }],
+                    where: {
+                        [Op.or]: ['name'].map(key => ({
+                            [key]: {
+                                [Op.like]: `%${search}%`
+                            }
+                        }))
+                    }
+                })
+
+            } else {
+                allPots = await Pot.findAll({
+                    limit: 10,
+                    order: [
+                        ['updatedAt', 'DESC']
+                    ],
+                    include: [{
+                        model: PotStatus
+                    }]
+                })
+            }
+
+            allPots = allPots.map(pot => pot.toJSON())
+                .map(pot => _.extend({
+                        potId: pot.id,
+                        name: pot.name,
+                        potUpdated: pot.updatedAt,
+                        potCreated: pot.createdAt
+                    },
+                    pot.PotStatus))
 
             res.send(allPots)
         } catch (err) {
