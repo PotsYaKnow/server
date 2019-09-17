@@ -57,13 +57,6 @@ module.exports = {
                     ],
                     include: [{
                         model: PotStatus,
-                        where: {
-                            [Op.or]: ['status'].map(key => ({
-                                [key]: {
-                                    [Op.like]: `%${search}%`
-                                }
-                            }))
-                        }
                     }],
                     where: {
                         [Op.or]: ['name'].map(key => ({

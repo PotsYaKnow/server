@@ -1,22 +1,20 @@
 <template>
-  <div>
+  <div >
     <panel title="Pot">
       <div>
-        <div class="pot" v-for="pot in allPots">
+        <div class="pot" v-for="pot in foundPots">
           <div class="flex justify-around">
             <p class="pot-name">{{pot.name}}</p>
             <p class="pot-name">{{pot.status}}</p>
-
             <router-link :to="{name: 'edit-pot', params: {potId: pot.id}}">
               <button class="btn btn-blue"> Edit </button>
             </router-link>
-
             <router-link :to="{name: 'view-pot', params: {potId: pot.id}}">
               <button class="btn btn-blue"> View </button>
             </router-link>
           </div>
         </div>
-        <h2 v-if="allPots == null"> No Pots Here..Go make some!!!</h2>
+        <h2 v-if="foundPots == null"> No Pots Here..Go make some!!!</h2>
       </div>
     </panel>
   </div>
@@ -27,13 +25,17 @@ export default {
   components: {},
   data() {
     return {
-
-      allPots: ''
-
+      foundPots: ''
     }
   },
-  async mounted () {
-  this.allPots = (await PotService.getAllPots()).data
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.foundPots = (await PotService.getAllPots(value)).data
+
+      }
+    }
   }
 }
 

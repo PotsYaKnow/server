@@ -1,0 +1,71 @@
+<template>
+  <div class="flex">
+
+      <panel title="Search Pots">
+        <div class="flex">
+          <input v-model="search" type="search" aria-label="Search for pots by name or status" placeholder="Search by pot name or status" />
+          <div class="flex flex-col">
+            <select id="pot-status">
+              <option v-for="potStatus in allPotStatuses">
+                {{ potStatus.status }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </panel>
+
+
+
+
+
+
+  </div>
+</template>
+<script>
+import _ from 'lodash'
+import PotService from '@/services/PotService'
+
+export default {
+  name: '',
+  props: [],
+  data() {
+    return {
+      search: '',
+      allPotStatuses : []
+    }
+  },
+  watch: {
+    search: _.debounce(async function (value) {
+      const route = {
+        name: 'index'
+      }
+
+      if (this.search !== '') {
+        route.query = {
+          search: this.search
+        }
+      }
+      this.$router.push(route)
+    }, 200),
+    '$route.query.search': {
+      immediate: true,
+      handler(value) {
+        this.search = value
+      }
+    }
+  },
+  methods: {
+    navigateTo(route) {
+      this.$router.push(route)
+    }
+  },
+  async mounted () {
+    this.allPotStatuses = (await PotService.getAllPotStatuses()).data
+    this.allPotStatuses.unshift({status:"All Statuses"})
+  }
+}
+
+</script>
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+</style>
