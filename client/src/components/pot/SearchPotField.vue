@@ -3,14 +3,7 @@
 
       <panel title="Search Pots">
         <div class="flex">
-          <input v-model="search" type="search" aria-label="Search for pots by name or status" placeholder="Search by pot name or status" />
-          <div class="flex flex-col">
-            <select id="pot-status">
-              <option v-for="potStatus in allPotStatuses">
-                {{ potStatus.status }}
-              </option>
-            </select>
-          </div>
+          <input v-model="search" type="search" aria-label="Search for pots by name or status" placeholder="Search by pot name" />
         </div>
       </panel>
 
@@ -30,8 +23,7 @@ export default {
   props: [],
   data() {
     return {
-      search: '',
-      allPotStatuses : []
+      search: ''
     }
   },
   watch: {
@@ -58,10 +50,6 @@ export default {
     navigateTo(route) {
       this.$router.push(route)
     }
-  },
-  async mounted () {
-    this.allPotStatuses = (await PotService.getAllPotStatuses()).data
-    this.allPotStatuses.unshift({status:"All Statuses"})
   }
 }
 

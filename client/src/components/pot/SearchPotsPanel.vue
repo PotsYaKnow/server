@@ -1,31 +1,22 @@
 <template>
-  <div >
-    <panel title="Pot">
-      <div>
-        <div class="pot" v-for="pot in foundPots">
-          <div class="flex justify-around">
-            <p class="pot-name">{{pot.name}}</p>
-            <p class="pot-name">{{pot.status}}</p>
-            <router-link :to="{name: 'edit-pot', params: {potId: pot.id}}">
-              <button class="btn btn-blue"> Edit </button>
-            </router-link>
-            <router-link :to="{name: 'view-pot', params: {potId: pot.id}}">
-              <button class="btn btn-blue"> View </button>
-            </router-link>
-          </div>
-        </div>
-        <h2 v-if="foundPots == null"> No Pots Here..Go make some!!!</h2>
+  <div>
+    <div class="pot" v-for="pot in foundPots">
+      <div class="flex justify-around">
+        <potcard v-bind:potCardModel="pot" />
       </div>
-    </panel>
+    </div>
+    <h2 v-if="foundPots == null"> No Pots Here..Go make some!!!</h2>
   </div>
 </template>
 <script>
 import PotService from '@/services/PotService'
+import PotCard from './PotCard'
+
 export default {
-  components: {},
+  components: { potcard: PotCard },
   data() {
     return {
-      foundPots: ''
+      foundPots: []
     }
   },
   watch: {

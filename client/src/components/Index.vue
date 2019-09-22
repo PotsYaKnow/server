@@ -14,21 +14,21 @@
       </router-link>
     </div>
     <div v-if="$store.state.isUserLoggedIn">
-      <index-search-pot />
-      <search-pot-panel>
-      </search-pot-panel>
+      <searchPotField />
+      <searchPotPanel/>
+
     </div>
   </div>
 </template>
 <script>
 import SearchPotsPanel from './pot/SearchPotsPanel'
-import IndexSearchPot from './pot/IndexSearchPot'
+import SearchPotField from './pot/SearchPotField'
 
 export default {
   name: 'Index',
   components: {
-    'search-pot-panel': SearchPotsPanel,
-    'index-search-pot': IndexSearchPot
+    'searchPotPanel': SearchPotsPanel,
+    'searchPotField': SearchPotField
   },
 }
 
