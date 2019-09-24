@@ -1,11 +1,8 @@
 <template>
   <div>
     <div class="pot" v-for="potHistory in allPotHistory">
-      <PotHistoryPanel v-bind:potHistory="potHistory" />
       <div class="flex justify-around">
-        <router-link :to="{name: 'edit-pothistory', params: {potHistoryId: potHistory.id}}">
-          <button class="btn btn-blue"> Edit </button>
-        </router-link>
+        <potcard v-bind:potCardModel="potHistory" />
       </div>
     </div>
   </div>
@@ -13,9 +10,10 @@
 <script>
 import PotService from '@/services/PotService'
 import PotHistoryPanel from './PotHistoryPanel'
+import PotCard from './PotCard'
 
 export default {
-  components: { PotHistoryPanel },
+  components: { PotHistoryPanel, potcard: PotCard},
   name: 'PotHistory',
   props: [],
   data() {
@@ -35,7 +33,7 @@ export default {
     '$route.params': {
       immediate: true,
       async handler (value) {
-      console.log(value)
+
         this.allPotHistory = (await PotService.getPotHistory(value.potId)).data
       }
     }

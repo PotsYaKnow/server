@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
 
     const PotHistory = sequelize.define('PotHistory', {
+      name: DataTypes.STRING,
       notes: DataTypes.TEXT
     });
 
