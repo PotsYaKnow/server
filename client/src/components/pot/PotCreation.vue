@@ -42,7 +42,7 @@ export default {
         name: null,
         PotStatusId: 1,
         notes: null,
-        userId: this.$store.state.user.id
+        UserId: this.$store.state.user.id
       }
     }
   },

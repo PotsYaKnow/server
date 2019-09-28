@@ -2,7 +2,9 @@
   <div>
     <div class="pot" v-for="potHistory in allPotHistory">
       <div class="flex justify-around">
-        <potcard v-bind:potCardModel="potHistory" />
+        <div @click="edit(potHistory)">
+          <potcard v-bind:potCardModel="potHistory" />
+        </div>
       </div>
     </div>
   </div>
@@ -13,7 +15,7 @@ import PotHistoryPanel from './PotHistoryPanel'
 import PotCard from './PotCard'
 
 export default {
-  components: { PotHistoryPanel, potcard: PotCard},
+  components: { PotHistoryPanel, potcard: PotCard },
   name: 'PotHistory',
   props: [],
   data() {
@@ -36,6 +38,14 @@ export default {
 
         this.allPotHistory = (await PotService.getPotHistory(value.potId)).data
       }
+    }
+  },
+  methods: {
+    edit(potHistory) {
+      this.$router.push({
+        name: 'edit-pothistory',
+        params: { potHistoryId: potHistory.id }
+      })
     }
   }
 }

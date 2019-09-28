@@ -7,15 +7,13 @@ module.exports = {
     async createPot (req, res) {
         try {
 
-            const potParams = req.body
-            //const userId = req.user.id
-
             const newPot = await Pot.create(req.body)
 
             const potHistory = await PotHistory.create({
                 PotId: newPot.id,
                 PotStatusId: newPot.PotStatusId,
                 notes: newPot.notes,
+                name: newPot.name
             })
 
             res.send(newPot)
@@ -101,19 +99,23 @@ module.exports = {
         try {
 
 
-            await Pot.update(req.body, {
+             await Pot.update(req.body, {
                 where: {
                     id: req.params.potId
                 }
             })
 
-            await PotHistory.create({
-                PotId: req.params.potId,
-                PotStatusId: req.body.PotStatusId,
-                notes: req.body.notes,
-            })
+             let updatedPot = await Pot.findByPk(req.params.potId)
 
-            res.send(req.body)
+           const potHistory = await PotHistory.create({
+               PotId: updatedPot.id,
+               PotStatusId: updatedPot.PotStatusId,
+               notes: updatedPot.notes,
+               name: updatedPot.name
+           })
+
+
+            res.send(potHistory)
         } catch (err) {
             console.log(err)
             res.status(500).send({

@@ -2,7 +2,9 @@
   <div>
     <div class="pot" v-for="pot in foundPots">
       <div class="flex justify-around">
-        <potcard v-bind:potCardModel="pot" />
+        <div class="w-3/4" @click="viewPot(pot)">
+          <potcard v-bind:potCardModel="pot" />
+        </div>
       </div>
     </div>
     <h2 v-if="foundPots == null"> No Pots Here..Go make some!!!</h2>
@@ -26,6 +28,14 @@ export default {
         this.foundPots = (await PotService.getAllPots(value)).data
 
       }
+    }
+  },
+  methods: {
+    viewPot(pot) {
+      this.$router.push({
+        name: 'view-pot',
+        params: { potId: pot.potId}
+      })
     }
   }
 }

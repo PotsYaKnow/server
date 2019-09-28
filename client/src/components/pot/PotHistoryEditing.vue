@@ -1,6 +1,6 @@
 <template>
   <div>
-  <h1> {{pot.name}} </h1>
+  <h1> {{potHistory.name}} </h1>
     <panel class="bg-white  w-3/4 max-w-md mx-auto" title="Edit Pot">
       <form class="rounded px-8 pt-2 pb-8 mb-4">
         <div class="mb-4">
@@ -34,14 +34,12 @@ export default {
   data() {
     return {
       allPotStatuses: '',
-      pot: null,
-      potHistory: null
+      potHistory: ''
     }
   },
   async mounted () {
     const potHistoryId = this.$store.state.route.params.potHistoryId
     this.potHistory = (await PotHistoryService.getPotHistory(potHistoryId)).data
-    this.pot = (await PotService.getPot(this.potHistory.PotId)).data
     this.allPotStatuses = (await PotService.getAllPotStatuses()).data
   },
   methods: {
@@ -50,7 +48,7 @@ export default {
         await PotHistoryService.editHistory(this.potHistory)
         this.$router.push({
           name: 'view-pot',
-          params: {potId: this.pot.id}
+          params: {potId: this.potHistory.PotId}
 
         })
       } catch (err) {
