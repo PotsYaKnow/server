@@ -6,5 +6,6 @@ export default {
   },
   editHistory(potHistory) {
     return Api().put(`history/${potHistory.id}`, potHistory)
-  }
+  },
+
 }

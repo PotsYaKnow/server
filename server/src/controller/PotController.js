@@ -99,20 +99,20 @@ module.exports = {
         try {
 
 
-             await Pot.update(req.body, {
+            await Pot.update(req.body, {
                 where: {
                     id: req.params.potId
                 }
             })
 
-             let updatedPot = await Pot.findByPk(req.params.potId)
+            let updatedPot = await Pot.findByPk(req.params.potId)
 
-           const potHistory = await PotHistory.create({
-               PotId: updatedPot.id,
-               PotStatusId: updatedPot.PotStatusId,
-               notes: updatedPot.notes,
-               name: updatedPot.name
-           })
+            const potHistory = await PotHistory.create({
+                PotId: updatedPot.id,
+                PotStatusId: updatedPot.PotStatusId,
+                notes: updatedPot.notes,
+                name: updatedPot.name
+            })
 
 
             res.send(potHistory)
@@ -127,11 +127,28 @@ module.exports = {
     async getAllPotsHistory (req, res) {
         try {
 
-            const allPotsHistory = await PotHistory.findAll({
+            let allPotsHistory = await PotHistory.findAll({
+                order: [
+                    ['updatedAt', 'DESC']
+                ],
+                include: [{
+                    model: PotStatus,
+                }],
                 where: {
                     PotId: req.params.potId
                 }
             })
+
+
+            allPotsHistory = allPotsHistory.map(potHistory => potHistory.toJSON())
+                .map(potHistory => _.extend({
+                        potHistoryId: potHistory.id,
+                        potId: potHistory.PotId,
+                        name: potHistory.name,
+                        potUpdated: potHistory.updatedAt,
+                        potCreated: potHistory.createdAt
+                    },
+                    potHistory.PotStatus))
 
             res.send(allPotsHistory)
         } catch (err) {
@@ -140,16 +157,5 @@ module.exports = {
                 error: 'An error occurred while trying to find all pots'
             })
         }
-    }
-}
-
-function renameProp (oldProp,
-    newProp, {
-        [oldProp]: old,
-        ...others
-    }) {
-    return {
-        [newProp]: old,
-        ...others
     }
 }

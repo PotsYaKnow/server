@@ -11,7 +11,6 @@ export default {
       }
     })
   },
-
   getAllPotStatuses() {
     return Api().get('potStatus')
   },

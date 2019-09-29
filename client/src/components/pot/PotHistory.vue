@@ -1,21 +1,21 @@
 <template>
   <div>
-    <div class="pot" v-for="potHistory in allPotHistory">
-      <div class="flex justify-around">
-        <div @click="edit(potHistory)">
-          <potcard v-bind:potCardModel="potHistory" />
-        </div>
+    <div class="flex">
+      <button class="btn btn-blue" type="button" >Delete </button>
+    </div>
+    <div class="flex flex-row w-5/6">
+      <div class="w-9/12" v-for="potHistory in allPotHistory" @click="edit(potHistory)">
+        <potcard v-bind:potCardModel="potHistory" />
       </div>
     </div>
   </div>
 </template>
 <script>
 import PotService from '@/services/PotService'
-import PotHistoryPanel from './PotHistoryPanel'
 import PotCard from './PotCard'
 
 export default {
-  components: { PotHistoryPanel, potcard: PotCard },
+  components: { potcard: PotCard },
   name: 'PotHistory',
   props: [],
   data() {
@@ -28,23 +28,13 @@ export default {
   },
   async mounted () {
     const potId = this.$store.state.route.params.potId
-    this.pot = (await PotService.getPot(potId)).data
-    this.allPotStatuses = (await PotService.getAllPotStatuses()).data
-  },
-  watch: {
-    '$route.params': {
-      immediate: true,
-      async handler (value) {
-
-        this.allPotHistory = (await PotService.getPotHistory(value.potId)).data
-      }
-    }
+    this.allPotHistory = (await PotService.getPotHistory(potId)).data
   },
   methods: {
     edit(potHistory) {
       this.$router.push({
         name: 'edit-pothistory',
-        params: { potHistoryId: potHistory.id }
+        params: { potHistoryId: potHistory.potHistoryId }
       })
     }
   }
