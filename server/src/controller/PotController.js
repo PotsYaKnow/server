@@ -157,5 +157,25 @@ module.exports = {
                 error: 'An error occurred while trying to find all pots'
             })
         }
+    },
+    async deletePot (req, res) {
+        try {
+
+            await PotHistory.destroy({
+                where: {
+                    PotId: req.params.potId
+                }
+            })
+
+            let deletedPot = await Pot.findByPk(req.params.potId)
+            deletedPot.destroy()
+
+            res.send(deletedPot)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to delete a pot'
+            })
+        }
     }
 }

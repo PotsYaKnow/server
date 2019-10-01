@@ -18,6 +18,7 @@ module.exports = function (app) {
     app.get('/pot', PotController.getAllPots)
     app.get('/pot/:potId', PotController.getPot)
     app.put('/pot/:potId', PotController.editPot)
+    app.delete('/pot/:potId', PotController.deletePot)
     app.get('/pot/history/:potId', PotController.getAllPotsHistory)
 
     app.get('/potstatus', PotStatusController.getAllPotStatuses)
@@ -25,6 +26,7 @@ module.exports = function (app) {
 
     app.get('/history/:potHistoryId', PotHistoryController.getPotHistory)
     app.put('/history/:potHistoryId', PotHistoryController.editPotHistory)
+    app.delete('/history/:potHistoryId', PotHistoryController.deletePotHistory)
 
 
 

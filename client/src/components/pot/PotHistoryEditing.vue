@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1> {{potHistory.name}} </h1>
+    <div class="flex justify-between p-5">
+      <h1> {{potHistory.name}} </h1>
+      <button type="button" class="btn btn-red" v-on:click="deleteHistory">
+        Delete this checkpoint</button>
+    </div>
     <panel class="bg-white  w-3/4 max-w-md mx-auto" title="Edit Pot">
       <form class="rounded px-8 pt-2 pb-8 mb-4">
         <div class="mb-4">
@@ -18,10 +22,12 @@
           <br>
           <textarea v-model="potHistory.notes" placeholder="Add some notes...."></textarea>
         </div>
-        <button class="btn btn-blue" v-on:click="editHistory">
-          Save</button>
-        <button type="button" class="btn btn-blue" v-on:click="cancel">
-          Cancel</button>
+        <div class="flex justify-around">
+          <button type="button" class="btn btn-blue" v-on:click="editHistory">
+            Save Changes</button>
+          <button type="button" class="btn btn-blue" v-on:click="cancel">
+            Cancel</button>
+        </div>
       </form>
     </panel>
   </div>
@@ -53,6 +59,19 @@ export default {
           params: { potId: this.potHistory.PotId }
 
         })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async deleteHistory () {
+      try {
+
+        await PotHistoryService.deleteHistory(this.potHistory.id)
+        this.$router.push({
+          name: 'view-pot',
+          params: { potId: this.potHistory.PotId }
+        })
+
       } catch (err) {
         console.log(err)
       }

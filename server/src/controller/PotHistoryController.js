@@ -33,5 +33,25 @@ module.exports = {
             })
         }
 
+    },
+    async deletePotHistory (req, res) {
+        try {
+
+            const potHistory = await PotHistory.findOne({
+                where: {
+                    id: req.params.potHistoryId
+                }
+            })
+
+            await potHistory.destroy()
+
+            res.send(potHistory)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to delete a pot'
+            })
+        }
+
     }
 }

@@ -22,5 +22,8 @@ export default {
   },
   editPot(pot) {
     return Api().put(`pot/${pot.id}`, pot)
+  },
+  deletePot(potId) {
+    return Api().delete(`pot/${potId}`)
   }
 }

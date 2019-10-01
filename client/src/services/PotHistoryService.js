@@ -7,5 +7,7 @@ export default {
   editHistory(potHistory) {
     return Api().put(`history/${potHistory.id}`, potHistory)
   },
-
+  deleteHistory(potHistoryId) {
+    return Api().delete(`history/${potHistoryId}`)
+  }
 }
