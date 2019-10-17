@@ -1,9 +1,9 @@
 <template>
   <div class="flex">
 
-      <panel title="Search Pots">
+      <panel title="Search">
         <div class="flex">
-          <input v-model="search" type="search" aria-label="Search for pots by name or status" placeholder="Search by pot name" />
+          <input v-model="search" type="search" aria-label="Search by pot name" placeholder="Search by pot name" />
         </div>
       </panel>
 

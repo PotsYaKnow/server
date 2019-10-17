@@ -8,7 +8,7 @@
         Connecting the pottery community one score and slip at a time.
       </h2>
     </div>
-    <div>
+    <div v-if="$store.state.isUserLoggedIn">
       <router-link :to="{name: 'create-pot'}">
         <button class="btn btn-blue">Add Pot</button>
       </router-link>

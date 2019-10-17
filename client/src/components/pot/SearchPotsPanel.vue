@@ -2,12 +2,19 @@
   <div>
     <div class="pot" v-for="pot in foundPots">
       <div class="flex justify-around">
-        <div class="w-3/4" @click="viewPot(pot)">
+        <div class="w-1/4 force-noselect w-1/2 max-w-3xl bg-white shadow-md mt-10
+        flex flex-col">
+        <div class="flex justify-between">
+        <button class="btn btn-blue" v-on:click="editPot(pot)">
+          Edit</button>
+          <button class="btn btn-blue" v-on:click="viewHistory(pot)">
+            History</button>
+            </div>
           <potcard v-bind:potCardModel="pot" />
         </div>
       </div>
     </div>
-    <h2 v-if="foundPots == null"> No Pots Here..Go make some!!!</h2>
+    <h2 v-if="foundPots.length == 0"> No Pots Here...</h2>
   </div>
 </template>
 <script>
@@ -31,7 +38,13 @@ export default {
     }
   },
   methods: {
-    viewPot(pot) {
+    editPot(pot) {
+      this.$router.push({
+        name: 'edit-pot',
+        params: { potId: pot.potId}
+      })
+    },
+    viewHistory(pot) {
       this.$router.push({
         name: 'view-pot',
         params: { potId: pot.potId}

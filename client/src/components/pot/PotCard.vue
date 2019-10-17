@@ -1,6 +1,5 @@
 <template>
-  <div class="pot-card force-noselect w-1/2 max-w-3xl bg-white shadow-md mt-10
-        flex flex-col" >
+  <div>
     <div class="self-start w-full truncate">
       <p class="truncate"> {{potCardModel.name}}</p>
     </div>
@@ -13,6 +12,14 @@ import PotService from '@/services/PotService'
 export default {
   components: {},
   props: ['potCardModel'],
+  methods: {
+    viewPot(pot) {
+      this.$router.push({
+        name: 'view-pot',
+        params: { potId: pot.potId}
+      })
+    }
+  }
 
 }
 
