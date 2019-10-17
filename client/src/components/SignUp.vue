@@ -37,6 +37,7 @@
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+import {mapState } from 'vuex'
 export default {
   name: 'signup',
   props: [],
@@ -55,14 +56,14 @@ export default {
           password: this.password
         })
 
-        this.$store.dispatch('setToken', response.data.token)
-        this.$store.dispatch('setUser', response.data.user)
+        this.$store.dispatch('user/setToken', response.data.token)
+        this.$store.dispatch('user/setUser', response.data.user)
         this.$router.push({
           name: 'index'
         })
 
       } catch (error) {
-
+      console.log(error)
         this.error = error.response.data.error
       }
     }
