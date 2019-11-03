@@ -12,16 +12,16 @@
     </div>
     <div class="flex justify-end">
       <router-link :to="{name: 'login'}">
-        <button v-if="!$store.state.isUserLoggedIn" class="btn btn-blue">
+        <button v-if="!$store.state.user.isUserLoggedIn" class="btn btn-blue">
           Login
         </button>
       </router-link>
       <router-link :to="{name: 'signup'}">
-        <button v-if="!$store.state.isUserLoggedIn" class="btn btn-blue">
+        <button v-if="!$store.state.user.isUserLoggedIn" class="btn btn-blue">
           Sign Up
         </button>
       </router-link>
-      <button v-if="$store.state.isUserLoggedIn" class="btn btn-blue" @click="logout">
+      <button v-if="$store.state.user.isUserLoggedIn" class="btn btn-blue" @click="logout">
         Log Out
       </button>
     </div>
@@ -31,8 +31,7 @@
 export default {
   methods: {
     logout (){
-      this.$store.dispatch('setToken', null)
-      this.$store.dispatch('setUser', null)
+      this.$store.dispatch('user/logout')
       this.$router.push({
         name: 'login'
       })

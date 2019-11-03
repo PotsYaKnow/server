@@ -7,7 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    user
+     user
   },
   strict: false, // for performance
   plugins: [createPersistedState()]
