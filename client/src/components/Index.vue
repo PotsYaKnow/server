@@ -1,6 +1,6 @@
 <template>
   <div class=" container mx-auto">
-    <div v-if="!$store.state.isUserLoggedIn">
+    <div v-if="!$store.state.user.isUserLoggedIn">
       <h1>
         Pots Ya Know
       </h1>
@@ -8,12 +8,11 @@
         Connecting the pottery community one score and slip at a time.
       </h2>
     </div>
-    <div>
-      <router-link :to="{name: 'create-pot'}">
-        <button class="btn btn-blue">Add Pot</button>
-      </router-link>
-    </div>
-    <div v-if="$store.state.isUserLoggedIn">
+
+    <div v-if="$store.state.user.isUserLoggedIn">
+    <router-link :to="{name: 'create-pot'}">
+      <button class="btn btn-blue">Add Pot</button>
+    </router-link>
       <searchPotField />
       <searchPotPanel/>
 

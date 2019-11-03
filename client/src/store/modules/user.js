@@ -4,9 +4,6 @@ const state = {
   isUserLoggedIn: false
 }
 
-const initialState = state
-
-
 const mutations = {
   setToken(state, token) {
 
@@ -20,24 +17,24 @@ const mutations = {
   setUser(state, user) {
     state.user = user
   },
-  logout(state) {
+  resetState(state)
+  {
     Object.keys(state).forEach(key => {
-      Object.assign(state[key], initialState[key])
+      Object.assign(state[key], null)
     })
-
   }
 }
 
 
 const actions = {
-  setToken({ commit, state}, token) {
-    commit('setToken', state.token, token)
+  setToken({ commit, state }, token) {
+    commit('setToken', token)
   },
-  setUser({ commit, state}, user) {
-    commit('setUser', state.user, user)
+  setUser({ commit, state }, user) {
+    commit('setUser', user)
   },
-  logout({ commit, state}) {
-    commit('logout', state)
+  logout({ commit, state }) {
+    commit('resetState')
   }
 }
 
@@ -45,7 +42,6 @@ const actions = {
 export default {
   namespaced: true,
   state,
-  initialState,
   actions,
   mutations
 }
