@@ -20,7 +20,7 @@ const mutations = {
   resetState(state)
   {
     Object.keys(state).forEach(key => {
-      Object.assign(state[key], null)
+      state[key] = null
     })
   }
 }

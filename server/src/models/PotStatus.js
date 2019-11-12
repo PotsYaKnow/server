@@ -1,7 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
 
     const PotStatus = sequelize.define('PotStatus', {
-      status : DataTypes.STRING
+      name : DataTypes.STRING
+    },
+    {
+        freezeTableName: true
     });
 
     return PotStatus

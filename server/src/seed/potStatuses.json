@@ -1,26 +1,26 @@
 [
     {
-        "status": "Building"
+        "name": "Building"
     },
     {
-        "status": "Drying"
+        "name": "Drying"
     },
     {
-        "status": "Leather Hard"
+        "name": "Leather Hard"
     },
     {
-        "status": "Bone Dry"
+        "name": "Bone Dry"
     },
     {
-        "status": "Greenware"
+        "name": "Greenware"
     },
     {
-        "status": "Bisqued"
+        "name": "Bisqued"
     },
     {
-        "status": "Glazed"
+        "name": "Glazed"
     },
     {
-        "status": "Complete"
+        "name": "Complete"
     }
 ]

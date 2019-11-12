@@ -44,8 +44,6 @@ module.exports = {
 
             let allPots = null
             const search = req.query.search
-            console.log(search)
-
 
             if (search) {
                 allPots = await Pot.findAll({

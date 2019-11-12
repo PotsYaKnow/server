@@ -32,11 +32,12 @@ export default {
     '$route.query.search': {
       immediate: true,
       async handler (value) {
+
         this.foundPots = (await PotService.getAllPots(value)).data
+      }
 
       }
-    }
-  },
+    },
   methods: {
     editPot(pot) {
       this.$router.push({
