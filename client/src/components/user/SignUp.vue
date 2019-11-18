@@ -11,7 +11,14 @@
          focus:shadow-outline" id="email" type="text" placeholder="Email">
         </div>
         <div class="mb-4 vertical-container-left">
-
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+            Username
+          </label>
+          <input v-model="username" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+         leading-tight focus:outline-none
+         focus:shadow-outline" id="username" type="text" placeholder="JohnnyPotsington">
+        </div>
+        <div class="mb-4 vertical-container-left">
           <label class="textfield-label" for="user-location">
             Location
           </label>
@@ -56,6 +63,7 @@ export default {
   props: [],
   data() {
     return {
+      username: '',
       email: '',
       password: '',
       error: null,
@@ -72,7 +80,7 @@ export default {
       try {
 
         const response = await AuthenticationService.signup({
-          username : this.username,
+          username: this.username,
           email: this.email,
           password: this.password,
           userLocation: this.userLocation
