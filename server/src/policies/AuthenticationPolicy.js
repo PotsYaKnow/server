@@ -4,10 +4,12 @@ module.exports = {
     signup(req, res, next) {
 
         const schema = {
+            username: Joi.string(),
             email: Joi.string().email(),
             password: Joi.string().regex(
                 new RegExp('^[a-zA-Z0-9]{8,32}$')
-            )
+            ),
+            userLocation: Joi.number()
         }
 
         const { error, value } = Joi.validate(req.body, schema)

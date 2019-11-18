@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
 
 
     User.associate = function (models) {
-        User.belongsTo(models.Country),
+        User.belongsTo(models.UserLocation),
         User.belongsToMany(models.UserGroup, { through: 'UserGroupMember' }),
         User.belongsToMany(models.Pot, {through: 'UserFavPot'})
     }

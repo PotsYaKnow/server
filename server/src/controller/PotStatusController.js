@@ -1,9 +1,8 @@
 const { PotStatus } = require('../models')
 
 module.exports = {
-    async getAllPotStatuses (req, res) {
+    async getAll (req, res) {
         try {
-            console.log('here')
             const allPotStatuses = await PotStatus.findAll()
             res.send(allPotStatuses)
         } catch (err) {
@@ -12,5 +11,18 @@ module.exports = {
                 error: 'An error occurred while trying to create a pot'
             })
         }
+    },
+    async get(req, res)
+    {
+        try
+        {
+
+        }
+        catch (err) {
+                    console.log(err)
+                    res.status(500).send({
+                        error: 'An error occurred while getting a potstatus'
+                    })
+                }
     }
 }

@@ -1,7 +1,7 @@
 const {
     sequelize,
     PotStatus,
-    Country,
+    UserLocation,
     ClayBody,
     FiringTemp,
     FiringAtmosphere,
@@ -11,7 +11,7 @@ const {
 const Promise = require('bluebird')
 const potStatuses = require('./potStatuses.json')
 const clay = require('./clayBodies.json')
-const countries = require('./countries.json')
+const locations = require('./userLocations.json')
 const temps = require('./firingTemps.json')
 const atmosphere = require('./firingAtmosphere.json')
 const glazes = require('./glazes.json')
@@ -24,7 +24,7 @@ sequelize.sync({ force: false })
         await Promise.all(
             potStatuses.map(potStatus => { PotStatus.create(potStatus) }),
             clay.map(clay => { ClayBody.create(clay) }),
-            countries.map(country => { Country.create(country) }),
+            locations.map(location => { UserLocation.create(location) }),
             temps.map(temp => { FiringTemp.create(temp) }),
             atmosphere.map(atmosphere => { FiringAtmosphere.create(atmosphere) }),
             glazes.map(glaze => { Glaze.create(glaze) }),

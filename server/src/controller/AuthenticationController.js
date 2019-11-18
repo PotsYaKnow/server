@@ -11,7 +11,11 @@ module.exports = {
 
     async signup (req, res) {
         try {
-            const user = await User.create(req.body)
+            const user = await User.create({
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                UserLocationId: req.body.userLocation})
 
             const userJson = user.toJSON()
 

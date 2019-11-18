@@ -2,12 +2,12 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-    const Country = sequelize.define('Country', {
+    const UserLocation = sequelize.define('UserLocation', {
         name: DataTypes.STRING
     },
     {
         freezeTableName: true
     })
 
-    return Country
+    return UserLocation
 }

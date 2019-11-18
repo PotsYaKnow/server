@@ -2,7 +2,7 @@
   <div>
     <panel title="Sign Up">
       <form autocomplete="off" class="rounded px-8 pt-2 pb-8 mb-4">
-        <div class="mb-4">
+        <div class="mb-4 vertical-container-left">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
             Email
           </label>
@@ -10,7 +10,18 @@
          leading-tight focus:outline-none
          focus:shadow-outline" id="email" type="text" placeholder="Email">
         </div>
-        <div class="mb-6">
+        <div class="mb-4 vertical-container-left">
+
+          <label class="textfield-label" for="user-location">
+            Location
+          </label>
+          <select v-model="userLocation">
+            <option v-for="userLocation in allUserLocations" v-bind:value="userLocation.id">
+              {{ userLocation.name }}
+            </option>
+          </select>
+        </div>
+        <div class="mb-6 vertical-container-left">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
             Password
           </label>
@@ -37,7 +48,9 @@
 </template>
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import {mapState } from 'vuex'
+import { mapState } from 'vuex'
+import UserLocationService from '@/services/UserLocationService'
+
 export default {
   name: 'signup',
   props: [],
@@ -45,15 +58,24 @@ export default {
     return {
       email: '',
       password: '',
-      error: null
+      error: null,
+      allUserLocations: [],
+      userLocation: 1
+
     }
+  },
+  async mounted () {
+    this.allUserLocations = (await UserLocationService.getAll()).data
   },
   methods: {
     async signup () {
       try {
+
         const response = await AuthenticationService.signup({
+          username : this.username,
           email: this.email,
-          password: this.password
+          password: this.password,
+          userLocation: this.userLocation
         })
 
         this.$store.dispatch('user/setToken', response.data.token)
@@ -63,7 +85,7 @@ export default {
         })
 
       } catch (error) {
-      console.log(error)
+        console.log(error)
         this.error = error.response.data.error
       }
     }
