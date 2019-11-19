@@ -1,7 +1,7 @@
 import Api from '@/services/Api'
 
 export default {
-  createPot(newPot) {
+  create(newPot) {
     return Api().post('pot', newPot)
   },
   getAllPots(searchParams) {
@@ -10,9 +10,6 @@ export default {
         search: searchParams
       }
     })
-  },
-  getAllPotStatuses() {
-    return Api().get('potStatus')
   },
   getPotHistory(potId) {
     return Api().get(`pot/history/${potId}`, potId)

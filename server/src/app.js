@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(cors()) // allow any client hit our server; will setup token later
 
 require('./passport')
-require('./routes')(app)
+require('./routes/index')(app)
 
 sequelize.sync({force: false}).
 then(() => {
