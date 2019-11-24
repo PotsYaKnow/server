@@ -5,7 +5,8 @@ const {
     ClayBody,
     FiringTemp,
     FiringAtmosphere,
-    Glaze
+    Glaze,
+    Slip
 } = require('../models')
 
 const Promise = require('bluebird')
@@ -15,6 +16,7 @@ const locations = require('./userLocations.json')
 const temps = require('./firingTemps.json')
 const atmosphere = require('./firingAtmosphere.json')
 const glazes = require('./glazes.json')
+const slips = require('./slips.json')
 
 
 
@@ -28,5 +30,6 @@ sequelize.sync({ force: false })
             temps.map(temp => { FiringTemp.create(temp) }),
             atmosphere.map(atmosphere => { FiringAtmosphere.create(atmosphere) }),
             glazes.map(glaze => { Glaze.create(glaze) }),
+            slips.map(slip => { Slip.create(slip) }),
         )
     })

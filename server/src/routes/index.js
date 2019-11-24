@@ -13,6 +13,7 @@ const potStatus = require('./potStatus')
 const firingTemp = require('./firingTemp')
 const firingAtmosphere = require('./firingAtmosphere')
 const clayBody = require('./clayBody')
+const slip = require('./slip')
 
 module.exports = function (app) {
 
@@ -41,6 +42,7 @@ module.exports = function (app) {
 
     app.use('/potStatus', potStatus)
     app.use('/glaze', glaze)
+    app.use('/slip', slip)
     app.use('/firingTemp', firingTemp)
     app.use('/firingAtmosphere', firingAtmosphere)
     app.use('/clayBody', clayBody)

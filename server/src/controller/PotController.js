@@ -7,14 +7,22 @@ module.exports = {
     async createPot (req, res) {
         try {
 
-            const newPot = await Pot.create(req.body)
+            var sentPot = {
+                name: req.body.name,
+                notes: req.body.notes,
+                PotStatusId: req.body.potStatusId,
+                FiringTempId: req.body.firingTempId,
+                FiringAtmosphereId: req.body.firingAtmosphereId,
+                GlazeId: req.body.glazeId,
+                ClayBodyId: req.body.clayBodyId,
+                SlipId: req.body.slipId,
+                slipColor: req.body.slipColor,
+                underglazeColor: req.body.underglazeColor,
+                overglazeColor: req.body.overglazeColor,
+                published: req.body.published ? 1 : 0
+            }
 
-            const potHistory = await PotHistory.create({
-                PotId: newPot.id,
-                PotStatusId: newPot.PotStatusId,
-                notes: newPot.notes,
-                name: newPot.name
-            })
+            const newPot = await Pot.create(sentPot)
 
             res.send(newPot)
         } catch (err) {

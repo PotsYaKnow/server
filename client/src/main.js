@@ -8,7 +8,6 @@ import store from './store'
 import '@/assets/css/tailwind.css'
 import '@/assets/css/main.css'
 import Panel from '@/components/global/Panel'
-
 Vue.config.productionTip = false
 
 sync(store, router)
