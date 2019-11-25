@@ -154,7 +154,8 @@ export default {
         underglazeColor: null,
         overglazeColor: null,
         name: null,
-        published: true
+        published: true,
+        userId: this.$store.state.user.user.id
       }
     }
   },
@@ -183,6 +184,7 @@ export default {
     async createPot () {
       try {
         if (this.validateForm()) {
+        console.log(this.newPot)
           await PotService.create(this.newPot)
           this.$router.push({
             name: 'index'

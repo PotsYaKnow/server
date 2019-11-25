@@ -17,7 +17,10 @@ module.exports = {
                 password: req.body.password,
                 UserLocationId: req.body.userLocation})
 
+
+
             const userJson = user.toJSON()
+            console.log(userJson)
             res.send({
                 user: userJson,
                 token: jwtSignUser(userJson)

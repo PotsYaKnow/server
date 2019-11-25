@@ -11,9 +11,6 @@ export default {
       }
     })
   },
-  getPotHistory(potId) {
-    return Api().get(`pot/history/${potId}`, potId)
-  },
   getPot(potId) {
     return Api().get(`pot/${potId}`, potId)
   },

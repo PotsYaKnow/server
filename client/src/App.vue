@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <PageHeader />
-    <main class="flex flex-col h-full" id="app">
+    <main id="app">
       <router-view />
     </main>
   </div>

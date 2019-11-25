@@ -41,3 +41,13 @@
   display:flex;
   justify-content: flex-start;
 }
+
+.potcard-container
+{
+  display:flex;
+  width: 90%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+

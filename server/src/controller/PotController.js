@@ -19,7 +19,8 @@ module.exports = {
                 slipColor: req.body.slipColor,
                 underglazeColor: req.body.underglazeColor,
                 overglazeColor: req.body.overglazeColor,
-                published: req.body.published ? 1 : 0
+                published: req.body.published ? 1 : 0,
+                UserId: req.body.userId
             }
 
             const newPot = await Pot.create(sentPot)

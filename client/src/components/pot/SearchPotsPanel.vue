@@ -1,15 +1,9 @@
 <template>
-  <div>
+  <div class="potcard-container" >
     <div class="pot" v-for="pot in foundPots">
       <div class="flex justify-around">
         <div class="w-1/4 force-noselect w-1/2 max-w-3xl bg-white shadow-md mt-10
         flex flex-col">
-        <div class="flex justify-between">
-        <button class="btn btn-blue" v-on:click="editPot(pot)">
-          Edit</button>
-          <button class="btn btn-blue" v-on:click="viewHistory(pot)">
-            History</button>
-            </div>
           <potcard v-bind:potCardModel="pot" />
         </div>
       </div>
@@ -18,22 +12,23 @@
   </div>
 </template>
 <script>
-import PotService from '@/services/PotService'
+import UsersPotService from '@/services/UsersPotService'
 import PotCard from './PotCard'
 
 export default {
   components: { potcard: PotCard },
   data() {
     return {
-      foundPots: []
+      foundPots: [],
     }
   },
   watch: {
     '$route.query.search': {
       immediate: true,
-      async handler (value) {
+      async handler (search) {
 
-        this.foundPots = (await PotService.getAllPots(value)).data
+        this.foundPots = (await UsersPotService.getAll(search,
+        this.$store.state.user.user.id)).data
       }
 
       }
@@ -68,6 +63,11 @@ export default {
 
 .pot-notes {
   font-size: 24px;
+}
+
+.pots::after {
+  content: "";
+  flex: auto;
 }
 
 </style>

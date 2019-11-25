@@ -14,13 +14,14 @@ const firingTemp = require('./firingTemp')
 const firingAtmosphere = require('./firingAtmosphere')
 const clayBody = require('./clayBody')
 const slip = require('./slip')
+const usersPot = require('./usersPot')
 
 module.exports = function (app) {
 
 
     app.post('/signup', AuthenticationPolicy.signup, AuthenticationController.signup)
     app.post('/login', AuthenticationController.login)
-
+    app.use('/pot/user', usersPot)
 
 
     app.post('/pot', PotController.createPot)
@@ -46,6 +47,7 @@ module.exports = function (app) {
     app.use('/firingTemp', firingTemp)
     app.use('/firingAtmosphere', firingAtmosphere)
     app.use('/clayBody', clayBody)
+
 
 
 
