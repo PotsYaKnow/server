@@ -8,14 +8,14 @@
         Connecting the pottery community one score and slip at a time.
       </h2>
     </div>
-
-    <div v-if="$store.state.user.isUserLoggedIn">
-    <router-link :to="{name: 'create-pot'}">
-      <button class="btn btn-blue">Add Pot</button>
-    </router-link>
+    <div class="flex mb-5 ml-2" v-if="$store.state.user.isUserLoggedIn">
+      <router-link :to="{name: 'create-pot'}">
+        <button class="btn btn-blue">Add Pot</button>
+      </router-link>
+    </div>
+    <div>
       <searchPotField />
-      <searchPotPanel/>
-
+      <searchPotPanel />
     </div>
   </div>
 </template>

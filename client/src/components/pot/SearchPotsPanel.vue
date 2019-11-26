@@ -1,11 +1,8 @@
 <template>
   <div class="potcard-container" >
     <div class="pot" v-for="pot in foundPots">
-      <div class="flex justify-around">
-        <div class="w-1/4 force-noselect w-1/2 max-w-3xl bg-white shadow-md mt-10
-        flex flex-col">
+      <div class="flex justify-between">
           <potcard v-bind:potCardModel="pot" />
-        </div>
       </div>
     </div>
     <h2 v-if="foundPots.length == 0"> No Pots Here...</h2>
@@ -26,7 +23,6 @@ export default {
     '$route.query.search': {
       immediate: true,
       async handler (search) {
-
         this.foundPots = (await UsersPotService.getAll(search,
         this.$store.state.user.user.id)).data
       }

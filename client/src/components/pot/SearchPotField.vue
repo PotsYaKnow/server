@@ -1,17 +1,8 @@
 <template>
-  <div class="flex">
-
-      <panel title="Search">
-        <div class="flex">
-          <input v-model="search" type="search" aria-label="Search by pot name" placeholder="Search by pot name" />
-        </div>
-      </panel>
-
-
-
-
-
-
+  <div class="flex justify-center">
+    <div class="flex">
+      <input class="textfield" v-model="search" type="search" aria-label="Search by pot name" placeholder="Search by pot name" />
+    </div>
   </div>
 </template>
 <script>
