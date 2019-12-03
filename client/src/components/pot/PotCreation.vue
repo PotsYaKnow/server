@@ -9,6 +9,14 @@
           <input v-bind:class="{ 'is-invalid': attemptSubmit && missingName }" v-model="newPot.name" class="textfield" id="pot-name" type="text" placeholder="What's your pot's name?" />
           <div v-if="attemptSubmit && missingName" class="invalid-feedback">This field is required.</div>
         </div>
+        <div class="mb-4 vertical-container-left">
+          <img class="potPhoto" id="potPhoto" :src="newPot.photo" />
+          <!-- body -->
+          <label for="upload">
+            Add Photo
+            <input accept="image/*" type="file" id="upload" v-on:change="showPreview" style="display:none">
+          </label>
+        </div>
         <!-- Clay Body -->
         <div class="mb-4 vertical-container-left">
           <label class="textfield-label" for="claybody">
@@ -129,6 +137,8 @@ import FiringTempService from '@/services/FiringTempService'
 import FiringAtmosphereService from '@/services/FiringAtmosphereService'
 import GlazeService from '@/services/GlazeService'
 import SlipService from '@/services/SlipService'
+import { readAndCompressImage } from 'browser-image-resizer';
+
 
 export default {
   name: 'PotCreation',
@@ -155,6 +165,7 @@ export default {
         overglazeColor: null,
         name: null,
         published: true,
+        photo: null,
         userId: this.$store.state.user.user.id
       }
     }
@@ -181,10 +192,25 @@ export default {
   },
 
   methods: {
+    async showPreview (changeEvent) {
+      let input = event.target
+
+      if (input.files) {
+        let fileReader = new FileReader()
+
+        fileReader.onload = (e) => {
+          this.newPot.photo = e.target.result
+        }
+
+        fileReader.readAsDataURL((await this.resizeImage(input.files[0])))
+      }
+
+
+    },
     async createPot () {
       try {
         if (this.validateForm()) {
-        console.log(this.newPot)
+          console.log(this.newPot)
           await PotService.create(this.newPot)
           this.$router.push({
             name: 'index'
@@ -200,8 +226,24 @@ export default {
       return this.missingName ? false : true;
 
 
+    },
+     async resizeImage (imageFile) {
+
+      const config = {
+        quality: 1.0,
+        maxWidth: 300,
+        maxHeight: 300,
+        autoRotate: true,
+      };
+
+      let image = await readAndCompressImage(imageFile, config)
+
+
+      return image
+
     }
   },
+
   async mounted () {
     this.allPotStatuses = (await PotStatusService.getAll()).data
     this.allClayBodies = (await ClayBodyService.getAll()).data
@@ -232,6 +274,11 @@ textarea {
 
 .invalid-feedback {
   color: red;
+}
+
+.potPhoto {
+  width: 300px;
+  height: 300px;
 }
 
 </style>
