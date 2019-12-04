@@ -15,21 +15,26 @@ const firingAtmosphere = require('./firingAtmosphere')
 const clayBody = require('./clayBody')
 const slip = require('./slip')
 const usersPot = require('./usersPot')
+const multer = require('multer')
+
+var upload = multer()
+
 
 module.exports = function (app) {
-
-
     app.post('/signup', AuthenticationPolicy.signup, AuthenticationController.signup)
     app.post('/login', AuthenticationController.login)
     app.use('/pot/user', usersPot)
 
 
-    app.post('/pot', PotController.createPot)
+
+    let photo = upload.fields([{ name: 'potPhoto', maxCount: 1 }])
+    app.post('/pot', photo, PotController.createPot)
     app.get('/pot', PotController.getAllPots)
     app.get('/pot/:potId', PotController.getPot)
     app.put('/pot/:potId', PotController.editPot)
     app.delete('/pot/:potId', PotController.deletePot)
     app.get('/pot/history/:potId', PotController.getAllPotsHistory)
+
 
 
 

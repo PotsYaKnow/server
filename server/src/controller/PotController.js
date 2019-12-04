@@ -9,6 +9,7 @@ module.exports = {
 
             var sentPot = {
                 name: req.body.name,
+                picture: req.body.potPhoto,
                 notes: req.body.notes,
                 PotStatusId: req.body.potStatusId,
                 FiringTempId: req.body.firingTempId,

@@ -10,19 +10,26 @@
           <div v-if="attemptSubmit && missingName" class="invalid-feedback">This field is required.</div>
         </div>
         <div class="mb-4 vertical-container-left">
-          <img class="potPhoto" id="potPhoto" :src="newPot.photo" />
+
+          <img v-if="addedPotPhoto" class="potPhoto" id="potPhoto" :src="newPot.potPhoto" />
+          <img v-if="!addedPotPhoto" class="potPhoto" id="potPhoto" :src="defaultPotPicture" />
           <!-- body -->
-          <label for="upload">
-            Add Photo
-            <input accept="image/*" type="file" id="upload" v-on:change="showPreview" style="display:none">
-          </label>
+          <div class="flex justify-between w-3/4">
+            <label class="text-blue-700" for="upload">
+              Add Photo
+              <input ref="selectedPotPhoto" accept="image/*" type="file" id="upload" v-on:change="showPreview" style="display:none">
+            </label>
+            <label v-on:click="restoreDefaultPotPhoto" class="text-blue-700">
+              Cancel
+            </label>
+          </div>
         </div>
         <!-- Clay Body -->
         <div class="mb-4 vertical-container-left">
           <label class="textfield-label" for="claybody">
             Clay Body
           </label>
-          <select id="claybody" v-model="newPot.clayBodyId">
+          <select class="textfield multiselect-field" id="claybody" v-model="newPot.clayBodyId">
             <option v-for="claybody in allClayBodies" v-bind:value="claybody.id">
               {{ claybody.name}}
             </option>
@@ -35,7 +42,7 @@
           <label class="textfield-label" for="pot-status">
             Pot Status
           </label>
-          <select id="pot-status" v-model="newPot.potStatusId">
+          <select class="textfield multiselect-field" id="pot-status" v-model="newPot.potStatusId">
             <option v-for="potStatus in allPotStatuses" v-bind:value="potStatus.id">
               {{ potStatus.name }}
             </option>
@@ -47,7 +54,7 @@
           <label class="textfield-label" for="slip">
             Slip Type
           </label>
-          <select id="slip" v-model="newPot.slipId">
+          <select class="textfield multiselect-field" id="slip" v-model="newPot.slipId">
             <option v-for="slip in allSlips" v-bind:value="slip.id">
               {{ slip.name }}
             </option>
@@ -81,7 +88,7 @@
           <label class="textfield-label" for="glaze">
             Glaze
           </label>
-          <select id="glaze" v-model="newPot.glazeId">
+          <select class="textfield multiselect-field" id="glaze" v-model="newPot.glazeId">
             <option v-for="glaze in allGlazes" v-bind:value="glaze.id">
               {{ glaze.name }}
             </option>
@@ -93,7 +100,7 @@
           <label class="textfield-label" for="firingtemp">
             Firing Temperature
           </label>
-          <select id="firingtemp" v-model="newPot.firingTempId">
+          <select class="textfield multiselect-field" id="firingtemp" v-model="newPot.firingTempId">
             <option v-for="firingtemp in allFiringTemps" v-bind:value="firingtemp.id">
               {{ firingtemp.name }}
             </option>
@@ -105,17 +112,19 @@
           <label class="textfield-label" for="firingatmosphere">
             Firing Atmosphere
           </label>
-          <select id="firingatmosphere" v-model="newPot.firingAtmosphereId">
+          <select class="textfield multiselect-field" id="firingatmosphere" v-model="newPot.firingAtmosphereId">
             <option v-for="firingatmosphere in allFiringAtmospheres" v-bind:value="firingatmosphere.id">
               {{ firingatmosphere.name }}
             </option>
           </select>
         </div>
         <!-- Firing Atmoshphere -->
+        <!-- NOTES -->
         <div class="mb-2 vertical-container-left">
           <span>Notes</span>
-          <textarea v-model="newPot.notes" placeholder="Add some notes...."></textarea>
+          <textarea class="textfield" v-model="newPot.notes" placeholder="Add some notes...."></textarea>
         </div>
+        <!-- NOTES -->
         <!-- Publish -->
         <div class="mb-4 horizontal-container">
           <label class="mr-2 textfield-label" for="published">
@@ -138,6 +147,7 @@ import FiringAtmosphereService from '@/services/FiringAtmosphereService'
 import GlazeService from '@/services/GlazeService'
 import SlipService from '@/services/SlipService'
 import { readAndCompressImage } from 'browser-image-resizer';
+import defaultPotPicture from "@/assets/add-image.svg"
 
 
 export default {
@@ -152,6 +162,8 @@ export default {
       allGlazes: [],
       allSlips: [],
       attemptSubmit: false,
+      addedPotPhoto : false,
+      defaultPotPicture : defaultPotPicture,
       newPot: {
         clayBodyId: 1,
         potStatusId: 1,
@@ -165,7 +177,7 @@ export default {
         overglazeColor: null,
         name: null,
         published: true,
-        photo: null,
+        potPhoto: null,
         userId: this.$store.state.user.user.id
       }
     }
@@ -193,13 +205,15 @@ export default {
 
   methods: {
     async showPreview (changeEvent) {
+
       let input = event.target
 
       if (input.files) {
         let fileReader = new FileReader()
 
         fileReader.onload = (e) => {
-          this.newPot.photo = e.target.result
+          this.newPot.potPhoto = e.target.result
+          this.addedPotPhoto = true
         }
 
         fileReader.readAsDataURL((await this.resizeImage(input.files[0])))
@@ -210,11 +224,19 @@ export default {
     async createPot () {
       try {
         if (this.validateForm()) {
-          console.log(this.newPot)
-          await PotService.create(this.newPot)
+
+          let formData = new FormData();
+
+          for (let key in this.newPot) {
+            formData.append(key, this.newPot[key]);
+          }
+
+          let response = await PotService.create(formData)
           this.$router.push({
             name: 'index'
           })
+
+
         }
       } catch (err) {
         console.log(err)
@@ -227,7 +249,7 @@ export default {
 
 
     },
-     async resizeImage (imageFile) {
+    async resizeImage (imageFile) {
 
       const config = {
         quality: 1.0,
@@ -241,6 +263,10 @@ export default {
 
       return image
 
+    },
+    restoreDefaultPotPhoto() {
+      this.$refs.selectedPotPhoto.value = ''
+      this.addedPotPhoto = false
     }
   },
 
@@ -268,6 +294,10 @@ textarea {
   width: 200px;
 }
 
+.multiselect-field {
+  width: 300px;
+}
+
 .is-invalid {
   border-color: red;
 }
@@ -278,7 +308,7 @@ textarea {
 
 .potPhoto {
   width: 300px;
-  height: 300px;
+  height: 200px;
 }
 
 </style>

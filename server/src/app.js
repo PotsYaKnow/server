@@ -9,7 +9,9 @@ const config = require('./config/config')
 const app = express()
 app.use(morgan('combined')) // prints logs; user agent; verbose logs
 app.use(bodyParser.json())
+
 app.use(cors()) // allow any client hit our server; will setup token later
+
 
 require('./passport')
 require('./routes/index')(app)
