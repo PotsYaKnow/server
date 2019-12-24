@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "prod": "PORT=8080 node ./src/app.js",
+    "prod": "port=8080 node ./src/app.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node ./src/seed"
