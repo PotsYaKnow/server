@@ -1,16 +1,13 @@
-'use strict'
-
-const { Model } = require('objection')
-
-class Locations extends Model {
-    static get tableName() {
-        return 'Locations'
+const LocationsDbo  = require('./dbo/LocationsDbo')
+class Locations {
+      all() {
+      return LocationsDbo.query()
     }
 
-    static get idColumn() {
-        return 'id';
+    byId(id)
+    {
+      return LocationsDbo.query().findById(id)
     }
-
 }
 
 module.exports = Locations
