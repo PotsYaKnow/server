@@ -1,12 +1,11 @@
-const { UserLocation } = require('../models')
-const Sequelize = require('sequelize')
-const Op = Sequelize.Op
+const Locations  = require('../models/Locations')
 const _ = require('lodash')
 
 module.exports = {
     async getAll (req, res) {
         try {
-            const locations = await UserLocation.findAll()
+            console.log(Locations)
+            const locations = await Locations.query()
             res.send(locations)
         } catch (err) {
             console.log(err)

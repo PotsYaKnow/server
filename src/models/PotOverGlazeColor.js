@@ -1,10 +1,8 @@
+
 module.exports = (sequelize, DataTypes) => {
 
-    const Pot = sequelize.define('Pot', {
-        name: DataTypes.STRING,
-        published: DataTypes.BOOLEAN,
-        picture: DataTypes.BLOB,
-        notes: DataTypes.STRING,
+    const PotOverGlazeColor = sequelize.define('PotOverGlazeColor', {
+        overglazeColor: DataTypes.STRING,
     }, {
         freezeTableName: true
     })
@@ -22,3 +20,8 @@ module.exports = (sequelize, DataTypes) => {
 
     return Pot
 }
+
+
+slipColor: DataTypes.STRING,
+underglazeColor: DataTypes.STRING,
+overglazeColor: DataTypes.STRING
