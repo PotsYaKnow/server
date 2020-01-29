@@ -1,4 +1,4 @@
-const Statuses  = require('../models/Statuses')
+const Statuses  = require('../models/StatusesFactory')
 
 module.exports = {
     async all (req, res) {

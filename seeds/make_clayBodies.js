@@ -4,88 +4,88 @@ exports.seed = function (knex) {
         .then(function () {
             // Inserts seed entries
             return knex('ClayBodies').insert([{
-                    "clay": "Earthenware"
+                    "clayBody": "Earthenware"
                 },
                 {
-                    "clay": "Earthenware - Throwing"
+                    "clayBody": "Earthenware - Throwing"
                 },
                 {
-                    "clay": "Earthenware - Slipcasting"
+                    "clayBody": "Earthenware - Slipcasting"
                 },
                 {
-                    "clay": "Earthenware - Sculpture"
+                    "clayBody": "Earthenware - Sculpture"
                 },
                 {
-                    "clay": "Earthenware - Hand-building"
+                    "clayBody": "Earthenware - Hand-building"
                 },
                 {
-                    "clay": "Earthenware - Salt"
+                    "clayBody": "Earthenware - Salt"
                 },
                 {
-                    "clay": "Earthenware - Raku"
+                    "clayBody": "Earthenware - Raku"
                 },
                 {
-                    "clay": "Stoneware"
+                    "clayBody": "Stoneware"
                 },
                 {
-                    "clay": "Stoneware - Throwing"
+                    "clayBody": "Stoneware - Throwing"
                 },
                 {
-                    "clay": "Stoneware - Slipcasting"
+                    "clayBody": "Stoneware - Slipcasting"
                 },
                 {
-                    "clay": "Stoneware - Sculpture"
+                    "clayBody": "Stoneware - Sculpture"
                 },
                 {
-                    "clay": "Stoneware - Hand - building"
+                    "clayBody": "Stoneware - Hand - building"
                 },
                 {
-                    "clay": "Stoneware - Salt"
+                    "clayBody": "Stoneware - Salt"
                 },
                 {
-                    "clay": "Stoneware - Raku"
+                    "clayBody": "Stoneware - Raku"
                 },
                 {
-                    "clay": "Porcelain"
+                    "clayBody": "Porcelain"
                 },
                 {
-                    "clay": "Porcelain - Throwing"
+                    "clayBody": "Porcelain - Throwing"
                 },
                 {
-                    "clay": "Porcelain - Slipcasting"
+                    "clayBody": "Porcelain - Slipcasting"
                 },
                 {
-                    "clay": "Porcelain - Sculpture"
+                    "clayBody": "Porcelain - Sculpture"
                 },
                 {
-                    "clay": "Porcelain - Hand - building"
+                    "clayBody": "Porcelain - Hand - building"
                 },
                 {
-                    "clay": "Porcelain - Salt"
+                    "clayBody": "Porcelain - Salt"
                 },
                 {
-                    "clay": "Porcelain - Raku"
+                    "clayBody": "Porcelain - Raku"
                 },
                 {
-                    "clay": "Flameware"
+                    "clayBody": "Flameware"
                 },
                 {
-                    "clay": "Flameware - Throwing"
+                    "clayBody": "Flameware - Throwing"
                 },
                 {
-                    "clay": "Flameware - Slipcasting"
+                    "clayBody": "Flameware - Slipcasting"
                 },
                 {
-                    "clay": "Flameware - Sculpture"
+                    "clayBody": "Flameware - Sculpture"
                 },
                 {
-                    "clay": "Flameware - Hand - building"
+                    "clayBody": "Flameware - Hand - building"
                 },
                 {
-                    "clay": "Flameware - Salt"
+                    "clayBody": "Flameware - Salt"
                 },
                 {
-                    "clay": "Flameware - Raku"
+                    "clayBody": "Flameware - Raku"
                 }
             ]);
         });

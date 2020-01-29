@@ -11,6 +11,17 @@ class LocationsDbo extends Model {
         return 'id';
     }
 
+    static get jsonSchema() {
+          return {
+              type: 'object',
+              required: ['id', 'country'],
+              properties: {
+                  id: { type: 'number' },
+                  country: { type: 'string' }
+              }
+          }
+      }
+
 }
 
 module.exports = LocationsDbo

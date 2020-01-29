@@ -1,4 +1,4 @@
-const ClayBodies  = require('../models/ClayBodies')
+const ClayBodies  = require('../models/ClayBodiesFactory')
 
 module.exports = {
     async all (req, res) {

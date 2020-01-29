@@ -3,6 +3,7 @@ exports.up = function (knex) {
         .createTable('Users', function (table) {
             table.increments('id').primary()
             table.string('email').unique().notNullable();
+            table.string('username').unique().notNullable();
             table.string('password').notNullable();
 
             table

@@ -5,10 +5,11 @@ const FiringTempRouter = require('./FiringTempRouter')
 const FiringAtmosphereRouter = require('./FiringAtmosphereRouter')
 const StatusRouter = require('./StatusRouter')
 const ClayBodyRouter = require('./ClayBodyRouter')
+const SignUpRouter = require('./SignUpRouter')
 
 module.exports = function (app) {
 
-
+app.use('/signup', SignUpRouter)
 app.use('/locations', LocationRouter)
 app.use('/glazes', GlazeRouter)
 app.use('/slips', SlipRouter)

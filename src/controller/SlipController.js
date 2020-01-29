@@ -1,4 +1,4 @@
-const Slips  = require('../models/Slips')
+const Slips  = require('../models/SlipsFactory')
 
 module.exports = {
     async all (req, res) {

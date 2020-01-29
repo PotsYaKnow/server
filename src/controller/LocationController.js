@@ -1,4 +1,4 @@
-const Locations  = require('../models/Locations')
+const Locations  = require('../models/LocationsFactory')
 
 module.exports = {
     async all (req, res) {

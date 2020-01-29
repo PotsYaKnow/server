@@ -1,4 +1,4 @@
-const Glazes  = require('../models/Glazes')
+const Glazes  = require('../models/GlazesFactory')
 
 module.exports = {
     async all (req, res) {

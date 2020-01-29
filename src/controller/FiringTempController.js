@@ -1,4 +1,4 @@
-const FiringTemps  = require('../models/FiringTemps')
+const FiringTemps  = require('../models/FiringTempsFactory')
 
 module.exports = {
     async all (req, res) {
