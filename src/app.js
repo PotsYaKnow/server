@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
 const config = require('./config/config')
 const Knex = require('knex')
 const connection = require('../knexfile')
@@ -15,9 +16,10 @@ Model.knex(knexConnection)
 
 const app = express()
 app.use(morgan('combined')) // prints logs; user agent; verbose logs
+
 app.use(bodyParser.json())
 
-app.use(cors()) // allow any client hit our server; will setup token later
+app.use(cors())
 
 
 require('./routes/index')(app)

@@ -11,7 +11,7 @@ class UsersFactory {
         })
 
         if (user) {
-            return getNewUser(user)
+            return this.toJson(user)
         }
 
         return null
@@ -67,9 +67,9 @@ class UsersFactory {
 
         if (user) {
             return {
+                "id" : user.id,
                 "email": user.email,
                 "username": user.username,
-                "password": user.password,
                 "locationId": user.locationId
             }
         }

@@ -7,7 +7,7 @@
     "prod": "node ./src/app.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./src/seed"
+    "clearDb": "npx knex migrate:rollback && npx knex migrate:latest && npx knex seed:run"
   },
   "keywords": [],
   "author": "kasozi wilson <soziandwelewilson@gmail.com>",
@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.1",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "joi": "^14.3.1",
