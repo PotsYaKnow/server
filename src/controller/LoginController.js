@@ -5,18 +5,31 @@ const JWT = require('../policies/JWT')
 
 module.exports = {
 
-    async signup (req, res) {
+    async login (req, res) {
         try {
+
             const usersFactory = new UsersFactory();
 
+            const { username, password } = req.body
 
-            const user = await usersFactory.create(
-                req.body.email,
-                req.body.username,
-                 req.body.password,
-                req.body.locationId)
+            const user = await usersFactory.byUserName(username)
+
+            if (!user) {
+                return res.status(403).send({
+                    error: 'The login information was incorrect'
+                })
+            }
+
+            const isPasswordValid = await usersFactory.comparePassword(password, user.password)
+
+            if (!isPasswordValid) {
+                return res.status(403).send({
+                    error: 'The login information was incorrect'
+                })
+            }
 
             const token = JWT.jwtSignUser(user)
+
             res.cookie(JWT.cookieName, token, SecureCookieOptions.cookieOptions())
             res.send({})
         } catch (err) {

@@ -1,4 +1,6 @@
 const UsersDbo = require('./dbo/UsersDbo')
+const Promise = require('bluebird')
+const bcrypt = Promise.promisifyAll(require('bcryptjs'))
 
 class UsersFactory {
 
@@ -20,46 +22,29 @@ class UsersFactory {
     async byEmail (email) {
         const users = await UsersDbo.query().where('email', email)
 
-        const foundUsers = new Array()
-        if (users) {
-
-            users.forEach(function (user) {
-                var newUser = this.toJson(user)
-                foundUsers.push(newUser)
-            })
+        if (users && users.length == 1) {
+            return this.toJson(users[0])
         }
 
-
-        return foundUsers
+        return null
     }
 
-    doesEmailExist(email) {
-        const users = this.byEmail(email)
-        return users.length > 0
+    async comparePassword(textPassword, hashedPassword)
+    {
+        console.log(textPassword)
+        console.log(hashedPassword)
+        return await bcrypt.compare(textPassword, hashedPassword)
     }
 
     async byUserName (username) {
         const users = await UsersDbo.query().where('username', username)
-        const foundUsers = new Array()
-        if (users) {
 
-            users.forEach(function (user) {
-                var newUser = this.toJson(user)
-                foundUsers.push(newUser)
-            })
-
-
-
+        if (users && users.length == 1) {
+            return this.toJson(users[0])
         }
 
-        return foundUsers
+        return null
     }
-
-    doesUsernameExist(username) {
-        const users = this.byUserName(username)
-        return users.length > 0
-    }
-
     //make sure user attributes are always what i expect
     // the database schema or database mapper library could change
     // but my api won't
@@ -67,9 +52,10 @@ class UsersFactory {
 
         if (user) {
             return {
-                "id" : user.id,
+                "id": user.id,
                 "email": user.email,
                 "username": user.username,
+                "password": user.password,
                 "locationId": user.locationId
             }
         }

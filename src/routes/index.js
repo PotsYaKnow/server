@@ -6,10 +6,12 @@ const FiringAtmosphereRouter = require('./FiringAtmosphereRouter')
 const StatusRouter = require('./StatusRouter')
 const ClayBodyRouter = require('./ClayBodyRouter')
 const SignUpRouter = require('./SignUpRouter')
+const LoginRouter = require('./LoginRouter')
 
 module.exports = function (app) {
 
 app.use('/signup', SignUpRouter)
+app.use('/login', LoginRouter)
 app.use('/locations', LocationRouter)
 app.use('/glazes', GlazeRouter)
 app.use('/slips', SlipRouter)

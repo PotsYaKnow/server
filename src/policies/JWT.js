@@ -1,10 +1,21 @@
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
 
+
+function jwtClaims (user) {
+    return {
+        client_id: user.id,
+        email: user.email,
+        name: user.username
+    }
+}
+
 module.exports = {
 
-   jwtSignUser (user) {
-      return jwt.sign(user, config.authentication.jwtSecret, { expiresIn: "7 days" })
-  }
+    cookieName: 'auth_token',
+
+    jwtSignUser(user) {
+        return jwt.sign(jwtClaims(user), config.authentication.jwtSecret, { expiresIn: "7 days" })
+    }
 
 }

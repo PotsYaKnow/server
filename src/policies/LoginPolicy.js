@@ -1,13 +1,11 @@
 const Joi = require('joi')
 
-function signupSchema () {
+function loginSchema () {
     const schema = {
         username: Joi.string().regex(new RegExp('^[a-zA-Z0-9_]{4,32}$')),
-        email: Joi.string().email(),
         password: Joi.string().regex(
             new RegExp('^[a-zA-Z0-9_/*/$/#&]{8,32}$')
-        ),
-        locationId: Joi.number()
+        )
     }
     return schema
 }
@@ -20,11 +18,8 @@ function getErrorMessage (fieldName) {
     }
 
     switch (fieldName) {
-        case 'email':
-            error.msg = 'You must provide a valid email address'
-            break;
         case 'username':
-            error.msg = 'You must provide a valid username'
+            error.msg = `That's not a valid username`
             break;
         case 'password':
             error.msg =
@@ -35,8 +30,7 @@ function getErrorMessage (fieldName) {
        2. It must be at least 8 characters in length and not greater than 32 characters in length.`
             break;
         default:
-
-            error.msg =  'Invalid sign up information'
+            error.msg =  'Invalid login information'
 
     }
 
@@ -44,9 +38,10 @@ function getErrorMessage (fieldName) {
 }
 
 module.exports = {
-    signupValidation(req, res, next) {
+    loginValidation(req, res, next) {
 
-        const { error, value } = Joi.validate(req.body, signupSchema())
+        console.log(req.body)
+        const { error, value } = Joi.validate(req.body, loginSchema())
 
         if (error) {
             let errorMsg = getErrorMessage(error.details[0].context.key)
