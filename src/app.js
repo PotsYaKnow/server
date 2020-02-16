@@ -20,7 +20,7 @@ app.use(morgan('combined')) // prints logs; user agent; verbose logs
 app.use(bodyParser.json())
 
 app.use(cors({
-    origin: 'http://localhost:8000'}))
+    origin: 'https://potsyaknow-client.herokuapp.com'}))
 
 
 
