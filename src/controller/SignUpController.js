@@ -7,18 +7,23 @@ module.exports = {
 
     async signup (req, res) {
         try {
+
             const usersFactory = new UsersFactory();
 
 
             const user = await usersFactory.create(
                 req.body.email,
                 req.body.username,
-                 req.body.password,
+                req.body.password,
                 req.body.locationId)
 
             const token = JWT.jwtSignUser(user)
+
             res.cookie(JWT.cookieName, token, SecureCookieOptions.cookieOptions())
-            res.send({})
+            res.send({
+                email: user.email,
+                username: user.username
+            })
         } catch (err) {
             console.log(err)
             res.status(400).send({

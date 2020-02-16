@@ -12,7 +12,7 @@ function jwtClaims (user) {
 
 module.exports = {
 
-    cookieName: 'auth_token',
+    cookieName: 'authtoken',
 
     jwtSignUser(user) {
         return jwt.sign(jwtClaims(user), config.authentication.jwtSecret, { expiresIn: "7 days" })

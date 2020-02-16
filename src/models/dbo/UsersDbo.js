@@ -31,7 +31,6 @@ class UsersDbo extends Model {
 
 function hashPassword (user, options) {
     const SALT_FACTOR = 8
-    console.log(user)
     return bcrypt.genSalt(SALT_FACTOR)
         .then(salt =>
             bcrypt.hash(user.password, salt, null))

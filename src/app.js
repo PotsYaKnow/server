@@ -19,7 +19,9 @@ app.use(morgan('combined')) // prints logs; user agent; verbose logs
 
 app.use(bodyParser.json())
 
-app.use(cors())
+app.use(cors({
+    origin: 'http://localhost:8000'}))
+
 
 
 require('./routes/index')(app)

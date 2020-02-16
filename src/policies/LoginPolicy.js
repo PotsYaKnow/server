@@ -39,8 +39,6 @@ function getErrorMessage (fieldName) {
 
 module.exports = {
     loginValidation(req, res, next) {
-
-        console.log(req.body)
         const { error, value } = Joi.validate(req.body, loginSchema())
 
         if (error) {

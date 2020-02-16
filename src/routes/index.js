@@ -10,6 +10,13 @@ const LoginRouter = require('./LoginRouter')
 
 module.exports = function (app) {
 
+  app.use((req, res, next) => {
+      res.append('Access-Control-Allow-Credentials', true);
+      res.append('Access-Control-Allow-Methods', 'GET,PUT,OPTIONS,POST,DELETE');
+      res.append('Access-Control-Allow-Headers', ['Content-Type', 'X-Requested-With', 'origin']);
+      next();
+  });
+
 app.use('/signup', SignUpRouter)
 app.use('/login', LoginRouter)
 app.use('/locations', LocationRouter)
