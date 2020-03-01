@@ -1,7 +1,16 @@
+const config = require('../config/config')
+
 module.exports = {
-     cookieOptions () {
+    cookieOptions() {
         const expireDate = new Date()
         expireDate.setDate(expireDate.getDate() + 7);
-        return { httpOnly: true, domain:'potsyaknow-server.herokuapp.com', path: '/'  }
+
+        if (config.env == 'development') {
+         return { httpOnly: true, domain: 'localhost', expires: expireDate, path: '/'}
+        }
+        else
+        {
+          return { httpOnly: true, domain: 'localhost', expires: expireDate, path: '/', sameSite:'none', secure:true }
+        }
     }
 }

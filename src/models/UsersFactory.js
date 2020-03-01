@@ -1,6 +1,4 @@
 const UsersDbo = require('./dbo/UsersDbo')
-const Promise = require('bluebird')
-const bcrypt = Promise.promisifyAll(require('bcryptjs'))
 
 class UsersFactory {
 
@@ -27,13 +25,6 @@ class UsersFactory {
         }
 
         return null
-    }
-
-    async comparePassword(textPassword, hashedPassword)
-    {
-        console.log(textPassword)
-        console.log(hashedPassword)
-        return await bcrypt.compare(textPassword, hashedPassword)
     }
 
     async byUserName (username) {

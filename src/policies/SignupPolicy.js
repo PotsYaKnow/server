@@ -20,12 +20,6 @@ function getErrorMessage (fieldName) {
     }
 
     switch (fieldName) {
-        case 'email':
-            error.msg = 'You must provide a valid email address'
-            break;
-        case 'username':
-            error.msg = 'You must provide a valid username'
-            break;
         case 'password':
             error.msg =
                 `The password provided failed to match the following rules:

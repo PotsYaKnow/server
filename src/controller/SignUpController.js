@@ -8,6 +8,8 @@ module.exports = {
     async signup (req, res) {
         try {
 
+
+
             const usersFactory = new UsersFactory();
 
 
@@ -17,7 +19,10 @@ module.exports = {
                 req.body.password,
                 req.body.locationId)
 
-            const token = JWT.jwtSignUser(user)
+            const token = await JWT.signUser(user)
+
+
+
 
             res.cookie(JWT.cookieName, token, SecureCookieOptions.cookieOptions())
             res.send({

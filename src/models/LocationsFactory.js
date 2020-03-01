@@ -8,7 +8,7 @@ class LocationsFactory {
 
 
         foundLocations.forEach(location => jsonLocations.push(this.toJson(location)))
-            return foundLocations
+            return jsonLocations
         }
 
        async byId(id) {

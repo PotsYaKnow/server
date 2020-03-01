@@ -8,19 +8,35 @@ const Knex = require('knex')
 const connection = require('../knexfile')
 const { Model } = require('objection')
 
-const knexConnection = Knex(connection.development)
+let knexConntection = null
+let originDomain = null
+
+if((!process.env.NODE_ENV || process.env.NODE_ENV === 'development'))
+{
+  knexConnection = Knex(connection.development)
+}
+else
+{
+  knexConnection = Knex(connection.production)
+}
 
 Model.knex(knexConnection)
 
-
-
 const app = express()
 app.use(morgan('combined')) // prints logs; user agent; verbose logs
-
 app.use(bodyParser.json())
+app.use(cookieParser())
 
-app.use(cors({
-    origin: 'https://potsyaknow-client.herokuapp.com'}))
+//setup cors
+const corsMod = cors({
+    origin: config.clientDomain,
+    credentials: true,
+    methods: ['GET', 'PUT', 'OPTIONS', 'POST', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'origin']
+})
+
+app.use(corsMod)
+
 
 
 

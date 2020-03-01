@@ -6,7 +6,6 @@ module.exports = {
             const clayBodies = await new ClayBodies().all()
             res.send(clayBodies)
         } catch (err) {
-            console.log(err)
             res.status(500).send({
                 error: 'An error occurred while trying to fetching all ClayBodies'
             })
@@ -19,7 +18,6 @@ module.exports = {
             const clayBodies = await new ClayBodies().byId(req.params.id)
             res.send(clayBodies)
         } catch (err) {
-            console.log(err)
             res.status(500).send({
                 error: 'An error occurred while trying to fetching a ClayBody'
             })

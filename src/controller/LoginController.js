@@ -1,26 +1,29 @@
 const UsersFactory = require('../models/UsersFactory')
 const SecureCookieOptions = require('../policies/SecureCookieOptions')
 const JWT = require('../policies/JWT')
+const PasswordComparer = require('../utils/PasswordComparer')
 
 
 module.exports = {
 
     async login (req, res) {
         try {
-
             const usersFactory = new UsersFactory();
 
-            const { username, password } = req.body
 
-            const user = await usersFactory.byUserName(username)
+            const { email, password } = req.body
 
-            if (!user) {
+
+            const userJson = await usersFactory.byEmail(email)
+
+            if (!userJson) {
                 return res.status(403).send({
                     error: 'The login information was incorrect'
                 })
             }
 
-            const isPasswordValid = await usersFactory.comparePassword(password, user.password)
+            //compare user entered password vs hashed password
+            const isPasswordValid = await PasswordComparer.compare(password, userJson.password)
 
             if (!isPasswordValid) {
                 return res.status(403).send({
@@ -28,7 +31,7 @@ module.exports = {
                 })
             }
 
-            const token = JWT.jwtSignUser(user)
+            const token = await JWT.signUser(userJson)
 
             res.cookie(JWT.cookieName, token, SecureCookieOptions.cookieOptions())
             res.send({})
