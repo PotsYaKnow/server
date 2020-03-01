@@ -9,7 +9,7 @@ router.use(function timeLog (req, res, next) {
     next()
 })
 
-
+router.get('/:id', AuthenticationController.verifyCookie, StudioController.get)
 router.get('/', AuthenticationController.verifyCookie, StudioController.all)
 router.post('/', AuthenticationController.verifyCookie, StudioController.create)
 router.put('/:id', AuthenticationController.verifyCookie, StudioController.edit)

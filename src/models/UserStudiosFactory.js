@@ -15,6 +15,18 @@ class UserStudiosFactory {
         return null
     }
 
+    async byId(id)
+    {
+        const studio = await UserStudiosDbo.query().findById(id)
+
+        if(studio)
+        {
+            return this.toJson(studio)
+        }
+
+        return null
+    }
+
     async edit (id, studioName) {
 
         const studio = await UserStudiosDbo.query().patchAndFetchById(id,{

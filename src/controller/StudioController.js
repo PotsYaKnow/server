@@ -11,7 +11,18 @@ module.exports = {
             })
         }
     },
+    async get (req, res) {
+        try {
 
+            const studio = await new Studios().byId(req.params.id)
+            res.send(studio)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send({
+                error: 'An error occurred while trying to fetching a Studio'
+            })
+        }
+    },
     async create (req, res) {
         try {
             const studio = await new Studios().create(req.user.id, req.body.name)
