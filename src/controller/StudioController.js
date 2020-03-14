@@ -3,6 +3,7 @@ module.exports = {
     async all (req, res) {
         try {
 
+            console.log('asdf')
             const studios = await new Studios().byUserId(req.user.id)
             res.send(studios)
         } catch (err) {

@@ -8,11 +8,13 @@ const ClayBodyRouter = require('./ClayBodyRouter')
 const SignUpRouter = require('./SignUpRouter')
 const LoginRouter = require('./LoginRouter')
 const StudioRouter = require('./StudioRouter')
+const AuthenticationController = require('../controller/AuthenticationController')
 
 module.exports = function (app) {
 
+  app.get('/isUserLoggedIn', AuthenticationController.isUserLoggedIn)
 app.use('/signup', SignUpRouter)
-app.use('/login', LoginRouter)
+app.use('/login', LoginRouter),
 app.use('/locations', LocationRouter)
 app.use('/glazes', GlazeRouter)
 app.use('/slips', SlipRouter)
