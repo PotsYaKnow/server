@@ -26,6 +26,7 @@ module.exports = {
     },
     async create (req, res) {
         try {
+            console.log(req.body)
             const studio = await new Studios().create(req.user.id, req.body.name)
             res.send(studio)
         } catch (err) {

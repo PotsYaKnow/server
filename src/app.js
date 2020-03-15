@@ -24,7 +24,9 @@ Model.knex(knexConnection)
 
 const app = express()
 app.use(morgan('combined')) // prints logs; user agent; verbose logs
+
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 //setup cors
