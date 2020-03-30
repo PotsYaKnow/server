@@ -12,7 +12,7 @@ const AuthenticationController = require('../controller/AuthenticationController
 
 module.exports = function (app) {
 
-  app.get('/isUserLoggedIn', AuthenticationController.isUserLoggedIn)
+app.get('/isUserLoggedIn', AuthenticationController.isUserLoggedIn)
 app.use('/signup', SignUpRouter)
 app.use('/login', LoginRouter),
 app.use('/locations', LocationRouter)

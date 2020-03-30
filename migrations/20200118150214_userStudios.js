@@ -12,6 +12,7 @@ exports.up = function (knex) {
                 .index()
 
             table.string('name')
+            table.string('photo')
         })
 };
 

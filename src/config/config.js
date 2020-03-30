@@ -16,5 +16,11 @@ module.exports = {
     authentication: {
         jwtSecret: process.env.JWT_SECRET || 'secret'
     },
-    clientDomain: process.env.clientUrl || 'http://localhost:8000'
+    clientDomain: process.env.clientUrl || 'http://localhost:8000',
+    cloudinary:{
+        name: process.env.cloudinary_namne || 'potsyaknow',
+        apiKey: process.env.cloudinary_apiKey || '457124294683199',
+        secret: process.env.cloudinary_secret || '46VWTwdZbsOPLgknPUcAEZAR5Ys',
+        url : process.env.cloudinary_url || 'cloudinary://457124294683199:46VWTwdZbsOPLgknPUcAEZAR5Ys@potsyaknow'
+    }
 }

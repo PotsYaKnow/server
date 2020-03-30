@@ -2,10 +2,11 @@ const UserStudiosDbo = require('./dbo/UserStudiosDbo')
 
 class UserStudiosFactory {
 
-    async create (userId, studioName) {
+    async create (userId, studioName, photo) {
         const studio = await UserStudiosDbo.query().insert({
             "userId": userId,
-            "name": studioName
+            "name": studioName,
+            "photo": photo
         })
 
         if (studio) {
@@ -57,7 +58,8 @@ class UserStudiosFactory {
         if (studio) {
             return {
                 "id": studio.id,
-                "name": studio.name
+                "name": studio.name,
+                "photo": studio.photo
             }
         }
 
