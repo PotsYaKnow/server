@@ -10,17 +10,26 @@ exports.seed = function (knex) {
                     "status": "Drying"
                 },
                 {
-                    "status": "Leather Hard"
+                    "status": "Leather-Hard"
                 },
                 {
                     "status": "Greenware"
                 },
                 {
-                    "status": "Bisqued"
+                    "status": "Bisque Firing"
                 },
                 {
-                    "status": "Glazed"
+                    "status", "Bisque Ware"
                 },
+                {
+                    "status": "Glazing"
+                },
+                {
+                    "status": "Glaze Firing"
+                },
+                {
+                    "status", "Glaze Ware"
+                }
                 {
                     "status": "Complete"
                 }
