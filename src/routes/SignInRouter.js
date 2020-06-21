@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const Controller = require('../controller/LoginController')
+const Controller = require('../controller/SignInController')
 const Policy = require('../policies/LoginPolicy')
 
 // middleware that is specific to this router
@@ -10,7 +10,7 @@ router.use(function timeLog (req, res, next) {
 })
 
 
-router.post('/', Policy.loginValidation, Controller.login)
+router.post('/', Policy.loginValidation, Controller.signIn)
 
 
 module.exports = router

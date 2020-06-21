@@ -7,9 +7,6 @@ module.exports = {
 
     async signup (req, res) {
         try {
-
-
-
             const usersFactory = new UsersFactory();
 
 

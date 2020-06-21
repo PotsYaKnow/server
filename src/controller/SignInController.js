@@ -6,7 +6,7 @@ const PasswordComparer = require('../utils/PasswordComparer')
 
 module.exports = {
 
-    async login (req, res) {
+    async signIn (req, res) {
         try {
             const usersFactory = new UsersFactory();
 
@@ -33,12 +33,12 @@ module.exports = {
 
             const token = await JWT.signUser(userJson)
 
-            res.cookie(JWT.cookieName, token, SecureCookieOptions.cookieOptions())
-            res.send({})
+
+            res.send(token)
         } catch (err) {
             console.log(err)
             res.status(400).send({
-                error: 'This email account or username is already in use'
+                error: 'The login information was incorrect'
             })
         }
     }
